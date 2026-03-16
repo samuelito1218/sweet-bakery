@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sweet Bakery by Angel</title>
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet"/>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+
+  <!-- Estilos propios (frontend/css/) -->
+  <link rel="stylesheet" href="css/variables.css"/>
+  <link rel="stylesheet" href="css/global.css"/>
+  <!-- Samuel: cuando tengas el header.css listo, añadirlo aquí -->
+
+  <style>
+    /* ── Estilos específicos de index.html ─────── */
+
+    .hero {
+      position: relative; min-height: 420px;
+      background:
+        linear-gradient(to bottom, rgba(255,249,242,0) 0%, rgba(255,249,242,.92) 72%),
+        url('https://images.unsplash.com/photo-1551879400-111a9087cd86?w=1200&q=80') center/cover no-repeat;
+      border-radius: var(--radio); margin: 12px;
+      display: flex; flex-direction: column;
+      justify-content: flex-end; padding: 36px 28px; text-align: center;
+    }
+    .hero-label {
+      font-size: .7rem; font-weight: 700; letter-spacing: .2em;
+      text-transform: uppercase; color: var(--rosa); margin-bottom: 8px;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 5vw, 3rem); font-weight: 700;
+      color: var(--texto); margin-bottom: 10px; line-height: 1.15;
+    }
+    .hero p {
+      color: var(--gris); font-size: .95rem;
+      max-width: 300px; margin: 0 auto 24px; line-height: 1.6;
+    }
+
+    .categorias-scroll {
+      display: flex; gap: 20px; overflow-x: auto;
+      padding: 20px 16px; scrollbar-width: none;
+    }
+    .categorias-scroll::-webkit-scrollbar { display: none; }
+    .cat-item {
+      display: flex; flex-direction: column;
+      align-items: center; gap: 6px; flex-shrink: 0; cursor: pointer;
+    }
+    .cat-icon {
+      width: 62px; height: 62px; border-radius: 50%;
+      background: #fff; border: 1.5px solid rgba(238,43,140,.12);
+      box-shadow: var(--sombra);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; transition: background .2s, border-color .2s;
+    }
+    .cat-item.active .cat-icon, .cat-item:hover .cat-icon {
+      background: var(--rosa-bg); border-color: var(--rosa);
+    }
+    .cat-item span { font-size: .72rem; font-weight: 600; color: var(--texto); }
+
+    .section-header {
+      display: flex; justify-content: space-between;
+      align-items: center; padding: 8px 16px 4px;
+    }
+    .section-header h2 { font-size: 1.25rem; font-weight: 700; margin: 0; font-family: 'DM Sans', sans-serif; }
+    .link-ver-todo { color: var(--rosa); font-size: .85rem; font-weight: 700; text-decoration: none; }
+
+    .productos-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr);
+      gap: 14px; padding: 12px 16px;
+    }
+    @media (min-width: 576px) { .productos-grid { grid-template-columns: repeat(3,1fr); } }
+    @media (min-width: 992px) { .productos-grid { grid-template-columns: repeat(4,1fr); } }
+
+    .producto-card {
+      background: #fff; border-radius: var(--radio); overflow: hidden;
+      box-shadow: 0 2px 12px rgba(0,0,0,.06); border: 1px solid rgba(0,0,0,.04);
+      transition: transform .25s, box-shadow .25s;
+    }
+    .producto-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 28px rgba(238,43,140,.14);
+    }
+    .card-img-wrap { position: relative; aspect-ratio: 1/1; overflow: hidden; }
+    .card-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s; }
+    .producto-card:hover .card-img-wrap img { transform: scale(1.06); }
+    .btn-fav {
+      position: absolute; top: 8px; right: 8px;
+      background: rgba(255,255,255,.85); backdrop-filter: blur(6px);
+      border: none; border-radius: 50%; width: 34px; height: 34px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--rosa); font-size: 1rem; cursor: pointer; transition: background .2s;
+    }
+    .btn-fav:hover { background: var(--rosa); color: #fff; }
+    .card-body-custom { padding: 10px 12px 12px; }
+    .card-body-custom .nombre { font-size: .88rem; font-weight: 700; margin-bottom: 2px; line-height: 1.3; }
+    .card-body-custom .subtitulo { font-size: .75rem; color: var(--gris); margin-bottom: 10px; }
+    .precio-row { display: flex; justify-content: space-between; align-items: center; }
+    .precio { color: var(--rosa); font-weight: 700; font-size: .95rem; }
+    .btn-carrito {
+      background: var(--menta); border: none; border-radius: 8px;
+      width: 32px; height: 32px;
+      display: flex; align-items: center; justify-content: center;
+      color: #1a5c3a; font-size: .9rem; cursor: pointer; transition: background .2s;
+    }
+    .btn-carrito:hover { background: var(--menta-dark); }
+
+    .banner-envio {
+      margin: 16px; padding: 28px 24px;
+      background: var(--rosa-bg); border: 1px solid rgba(238,43,140,.2);
+      border-radius: var(--radio); text-align: center;
+    }
+    .banner-envio i { font-size: 2.4rem; color: var(--rosa); margin-bottom: 12px; display: block; }
+    .banner-envio h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 8px; }
+    .banner-envio p { font-size: .875rem; color: var(--gris); margin-bottom: 14px; }
+    .link-saber-mas {
+      color: var(--rosa); font-weight: 700; font-size: .875rem;
+      border-bottom: 1.5px solid var(--rosa); padding-bottom: 1px; text-decoration: none;
+    }
+
+    @media (min-width: 992px) {
+      .hero { min-height: 520px; margin: 20px; }
+      .hero h1 { font-size: 3.2rem; }
+      .productos-grid { padding: 16px 20px; gap: 20px; }
+      .section-header { padding: 12px 20px 6px; }
+      .banner-envio { margin: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Samuel: incluir aquí el header/navbar superior -->
+  <!-- Ejemplo: <div id="header-placeholder"></div> o el include que acuerden -->
+
+  <main>
+
+    <!-- Hero -->
+    <section class="hero">
+      <span class="hero-label">🍞 Hecho fresco cada día</span>
+      <h1>Dulces hechos<br>con amor</h1>
+      <p>Postres artesanales preparados en casa y llevados hasta tu puerta en Cali.</p>
+      <div><a href="catalogo.html" class="btn-primary-custom">Ver catálogo</a></div>
+    </section>
+
+    <!-- Categorías -->
+    <div class="categorias-scroll">
+      <div class="cat-item active" onclick="filtrarCategoria(this,'todos')">
+        <div class="cat-icon">🏠</div><span>Todos</span>
+      </div>
+      <div class="cat-item" onclick="filtrarCategoria(this,'rollos')">
+        <div class="cat-icon">🌀</div><span>Rollos</span>
+      </div>
+      <div class="cat-item" onclick="filtrarCategoria(this,'galletas')">
+        <div class="cat-icon">🍪</div><span>Galletas</span>
+      </div>
+      <div class="cat-item" onclick="filtrarCategoria(this,'waffles')">
+        <div class="cat-icon">🧇</div><span>Waffles</span>
+      </div>
+      <div class="cat-item" onclick="filtrarCategoria(this,'especial')">
+        <div class="cat-icon">✨</div><span>Especial</span>
+      </div>
+    </div>
+
+    <!-- Productos destacados -->
+    <div class="section-header">
+      <h2>Nuestros favoritos</h2>
+      <a href="catalogo.html" class="link-ver-todo">Ver todos</a>
+    </div>
+    <div class="productos-grid" id="grid-productos"></div>
+
+    <!-- Banner envío -->
+    <div class="banner-envio">
+      <i class="bi bi-truck"></i>
+      <h3>Domicilio a toda Cali</h3>
+      <p>Empacamos tus postres con cuidado para que lleguen frescos y perfectos.</p>
+      <a href="contacto.html" class="link-saber-mas">Saber más</a>
+    </div>
+
+  </main>
+
+  <!-- Samuel: incluir aquí el footer y el bottom-nav -->
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Carrito (frontend/js/carrito.js) -->
+  <script src="js/carrito.js"></script>
+
+  <script>
+    /*
+     * DATOS DE PRUEBA — reemplazar con fetch a la API cuando Samuel la tenga lista:
+     *
+     *   fetch('http://localhost:3000/api/productos')
+     *     .then(r => r.json())
+     *     .then(data => renderProductos(data));
+     */
+    const productos = [
+      { id: 1, nombre: "Mini Rollos de Canela",  subtitulo: "Con glaseado de vainilla",    precio: 12000, categoria: "rollos",   imagen: "https://images.unsplash.com/photo-1509365465985-25d11c17e812?w=400&q=80" },
+      { id: 2, nombre: "Galletas de Chispas",     subtitulo: "Chocolate negro y leche",      precio: 8000,  categoria: "galletas", imagen: "https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=400&q=80" },
+      { id: 3, nombre: "Waffles Artesanales",     subtitulo: "Con fresas y crema chantilly", precio: 14000, categoria: "waffles",  imagen: "https://images.unsplash.com/photo-1562376552-0d160a2f238d?w=400&q=80" },
+      { id: 4, nombre: "Brownies de Chocolate",   subtitulo: "Doble chocolate oscuro",       precio: 10000, categoria: "galletas", imagen: "https://images.unsplash.com/photo-1569864358642-9d1684040f43?w=400&q=80" },
+    ];
+
+    function renderProductos(lista) {
+      const grid = document.getElementById('grid-productos');
+      grid.innerHTML = lista.length === 0
+        ? '<p class="text-center text-muted py-4" style="grid-column:1/-1">No hay productos en esta categoría.</p>'
+        : lista.map(p => `
+          <div class="producto-card">
+            <div class="card-img-wrap">
+              <img src="${p.imagen}" alt="${p.nombre}" loading="lazy"/>
+              <button class="btn-fav" aria-label="Favorito"><i class="bi bi-heart-fill"></i></button>
+            </div>
+            <div class="card-body-custom">
+              <p class="nombre">${p.nombre}</p>
+              <p class="subtitulo">${p.subtitulo}</p>
+              <div class="precio-row">
+                <span class="precio">$${p.precio.toLocaleString('es-CO')}</span>
+                <button class="btn-carrito" onclick="agregarAlCarrito(${p.id}, productos)" aria-label="Agregar">
+                  <i class="bi bi-cart-plus"></i>
+                </button>
+              </div>
+            </div>
+          </div>`).join('');
+    }
+
+    function filtrarCategoria(el, cat) {
+      document.querySelectorAll('.cat-item').forEach(i => i.classList.remove('active'));
+      el.classList.add('active');
+      renderProductos(cat === 'todos' ? productos : productos.filter(p => p.categoria === cat));
+    }
+
+    // Inicializar
+    renderProductos(productos);
+    actualizarContadorCarrito(); // definida en js/carrito.js
+  </script>
+
+</body>
+</html>

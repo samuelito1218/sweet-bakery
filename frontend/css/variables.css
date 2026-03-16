@@ -1,0 +1,40 @@
+:root {
+  /* ── Paleta de colores ─────────────────────────── */
+  --rosa:        #EE2B8C;
+  --rosa-claro:  #FFD6EC;
+  --rosa-bg:     #FFF0F7;
+  --menta:       #A8E6CF;
+  --menta-dark:  #7DD9B0;
+  --crema:       #FFF9F2;
+  --fondo:       #F8F6F7;
+  --blanco:      #FFFFFF;
+  --texto:       #181114;
+  --gris:        #6B7280;
+  --gris-claro:  #E5E7EB;
+  --exito:       #22C55E;
+  --error:       #EF4444;
+
+  /* ── Tipografía ────────────────────────────────── */
+  --fuente-titulo: 'Playfair Display', serif;
+  --fuente-cuerpo: 'DM Sans', sans-serif;
+
+  /* ── Bordes y radios ───────────────────────────── */
+  --radio:       14px;
+  --radio-sm:    8px;
+  --radio-pill:  999px;
+
+  /* ── Sombras ───────────────────────────────────── */
+  --sombra:      0 2px 16px rgba(238, 43, 140, .10);
+  --sombra-card: 0 2px 12px rgba(0, 0, 0, .06);
+  --sombra-btn:  0 8px 24px rgba(238, 43, 140, .30);
+
+  /* ── Transiciones ──────────────────────────────── */
+  --trans:       .2s ease;
+  --trans-slow:  .4s ease;
+
+  /* ── Espaciados ────────────────────────────────── */
+  --gap-sm:  8px;
+  --gap-md:  16px;
+  --gap-lg:  24px;
+  --gap-xl:  40px;
+}

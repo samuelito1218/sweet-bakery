@@ -1,0 +1,211 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap');
+
+/* ── Reset y base ────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  font-family: var(--fuente-cuerpo);
+  background-color: var(--fondo);
+  color: var(--texto);
+  -webkit-font-smoothing: antialiased;
+  padding-bottom: 80px; /* espacio para bottom-nav en móvil */
+}
+
+@media (min-width: 992px) {
+  body { padding-bottom: 0; }
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: var(--fuente-titulo);
+  color: var(--texto);
+}
+
+a { text-decoration: none; color: inherit; }
+img { max-width: 100%; display: block; }
+
+/* ── Botón principal (rosa pill) ─────────────────── */
+.btn-primary-custom {
+  display: inline-block;
+  background: var(--rosa);
+  color: var(--blanco);
+  border: none;
+  border-radius: var(--radio-pill);
+  padding: 14px 40px;
+  font-family: var(--fuente-cuerpo);
+  font-weight: 700;
+  font-size: 1rem;
+  box-shadow: var(--sombra-btn);
+  transition: transform var(--trans), box-shadow var(--trans), background var(--trans);
+  cursor: pointer;
+  text-decoration: none;
+}
+.btn-primary-custom:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(238, 43, 140, .40);
+  color: var(--blanco);
+  background: #d4207c;
+}
+.btn-primary-custom:active { transform: translateY(0); }
+
+/* ── Botón secundario (outline rosa) ─────────────── */
+.btn-secondary-custom {
+  display: inline-block;
+  background: transparent;
+  color: var(--rosa);
+  border: 2px solid var(--rosa);
+  border-radius: var(--radio-pill);
+  padding: 12px 36px;
+  font-family: var(--fuente-cuerpo);
+  font-weight: 700;
+  font-size: .95rem;
+  transition: background var(--trans), color var(--trans);
+  cursor: pointer;
+  text-decoration: none;
+}
+.btn-secondary-custom:hover {
+  background: var(--rosa-bg);
+  color: var(--rosa);
+}
+
+/* ── Badge ───────────────────────────────────────── */
+.badge-rosa {
+  background: var(--rosa);
+  color: var(--blanco);
+  font-size: .65rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: var(--radio-pill);
+}
+
+/* ── Navbar inferior (mobile) ────────────────────── */
+.bottom-nav {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  height: 68px;
+  background: rgba(255, 255, 255, .96);
+  backdrop-filter: blur(12px);
+  border-top: 1px solid var(--gris-claro);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 1050;
+}
+@media (min-width: 992px) { .bottom-nav { display: none; } }
+
+.nav-item-bot {
+  display: flex; flex-direction: column;
+  align-items: center; gap: 3px;
+  color: var(--gris); font-size: .65rem; font-weight: 600;
+  transition: color var(--trans);
+  padding: 6px 14px; text-decoration: none;
+}
+.nav-item-bot i { font-size: 1.3rem; }
+.nav-item-bot.active,
+.nav-item-bot:hover { color: var(--rosa); }
+
+/* ── Navbar superior ─────────────────────────────── */
+.topbar {
+  position: sticky; top: 0; z-index: 1040;
+  background: rgba(255, 255, 255, .88);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(0, 0, 0, .06);
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.topbar .brand-name {
+  font-family: var(--fuente-titulo);
+  font-style: italic; font-size: 1.25rem; font-weight: 700;
+  color: var(--rosa); line-height: 1;
+}
+.topbar .brand-sub {
+  font-size: .6rem; letter-spacing: .18em;
+  text-transform: uppercase; color: var(--gris);
+  display: block; text-align: center;
+}
+.btn-icon {
+  background: none; border: none; padding: 6px;
+  cursor: pointer; font-size: 1.4rem;
+  color: var(--texto); position: relative;
+  transition: color var(--trans);
+}
+.btn-icon:hover { color: var(--rosa); }
+.cart-badge {
+  position: absolute; top: 2px; right: 0;
+  background: var(--rosa); color: #fff;
+  font-size: .6rem; font-weight: 700;
+  width: 16px; height: 16px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* ── Notificación toast ──────────────────────────── */
+.notificacion {
+  position: fixed;
+  bottom: 90px; left: 50%; transform: translateX(-50%);
+  background: var(--texto);
+  color: var(--blanco);
+  padding: 10px 22px;
+  border-radius: var(--radio-pill);
+  font-size: .875rem; font-weight: 600;
+  z-index: 2000;
+  animation: fadeInOut 2.5s ease forwards;
+  white-space: nowrap;
+}
+@keyframes fadeInOut {
+  0%   { opacity: 0; transform: translateX(-50%) translateY(10px); }
+  15%  { opacity: 1; transform: translateX(-50%) translateY(0); }
+  75%  { opacity: 1; }
+  100% { opacity: 0; transform: translateX(-50%) translateY(-6px); }
+}
+
+/* ── Footer ──────────────────────────────────────── */
+footer {
+  background: var(--blanco);
+  border-top: 1px solid var(--gris-claro);
+  padding: 40px 24px 28px;
+  margin-top: 12px;
+}
+.brand-footer {
+  font-family: var(--fuente-titulo);
+  font-style: italic; font-size: 1.5rem; font-weight: 700;
+  color: var(--rosa);
+}
+.footer-desc {
+  font-size: .85rem; color: var(--gris);
+  margin: 10px 0 18px; line-height: 1.6;
+}
+.social-icons { display: flex; gap: 10px; }
+.social-btn {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: var(--fondo);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem; color: var(--gris);
+  text-decoration: none;
+  transition: background var(--trans), color var(--trans);
+}
+.social-btn:hover { background: var(--rosa); color: var(--blanco); }
+.footer-col-title {
+  font-size: .65rem; font-weight: 700;
+  letter-spacing: .18em; text-transform: uppercase;
+  color: var(--gris); margin-bottom: 14px;
+}
+.footer-link {
+  display: block; font-size: .875rem; font-weight: 500;
+  color: var(--texto); margin-bottom: 10px;
+  text-decoration: none; transition: color var(--trans);
+}
+.footer-link:hover { color: var(--rosa); }
+.footer-copy {
+  border-top: 1px solid var(--gris-claro);
+  padding-top: 20px; margin-top: 24px;
+  text-align: center; font-size: .72rem; color: #aaa;
+}
+
+/* ── Página vacía / sin resultados ───────────────── */
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--gris);
+}
+.empty-state i { font-size: 3rem; margin-bottom: 12px; color: var(--gris-claro); }
+.empty-state p { font-size: .95rem; }
