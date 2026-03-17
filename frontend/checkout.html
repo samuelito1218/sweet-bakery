@@ -7,186 +7,19 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --primary: #e23670;
-      --secondary: #955067;
-      --mint: #C1E1C1;
-      --lavender: #E6E6FA;
-      --bg-light: #FFFDF5;
-      --text-dark: #1b0e12;
-    }
-    
-    * { font-family: 'Plus Jakarta Sans', sans-serif; }
-    .logo-text { font-family: 'Great Vibes', cursive; font-size: 1.8rem; color: var(--primary); }
-    body { background-color: var(--bg-light); }
-    
-    .navbar { background: rgba(255, 253, 245, 0.95); backdrop-filter: blur(10px); box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
-    .navbar-brand { font-weight: 700; color: var(--primary) !important; }
-    
-    .step-indicator {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 2rem;
-      position: relative;
-    }
-    
-    .step {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      flex: 1;
-      position: relative;
-    }
-    
-    .step-number {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: #f0f0f0;
-      border: 2px solid #f0f0f0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-      z-index: 2;
-    }
-    
-    .step.active .step-number {
-      background: var(--primary);
-      color: white;
-      border-color: var(--primary);
-    }
-    
-    .step-label { font-size: 0.85rem; font-weight: 600; text-align: center; }
-    
-    .step::after {
-      content: '';
-      position: absolute;
-      top: 20px;
-      left: 50%;
-      width: 100%;
-      height: 2px;
-      background: #f0f0f0;
-      z-index: 1;
-    }
-    
-    .step:last-child::after { display: none; }
-    .step.active::after { background: var(--primary); }
-    
-    .form-section {
-      background: white;
-      padding: 2rem;
-      border-radius: 8px;
-      margin-bottom: 2rem;
-      border: 1px solid #f0f0f0;
-    }
-    
-    .payment-option {
-      border: 2px solid #f0f0f0;
-      border-radius: 8px;
-      padding: 1rem;
-      margin-bottom: 1rem;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-    
-    .payment-option:hover { border-color: var(--primary); }
-    .payment-option.active { border-color: var(--primary); background: rgba(226, 54, 112, 0.05); }
-    
-    .btn-primary-custom {
-      background: var(--primary);
-      color: white;
-      padding: 12px 28px;
-      border-radius: 8px;
-      border: none;
-      font-weight: 600;
-      text-decoration: none;
-      display: inline-block;
-      box-shadow: 0 4px 15px rgba(226, 54, 112, 0.3);
-      transition: all 0.3s ease;
-      width: 100%;
-    }
-    
-    .btn-primary-custom:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(226, 54, 112, 0.4);
-      color: white;
-    }
-    
-    .bottom-nav {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: rgba(255, 253, 245, 0.95);
-      backdrop-filter: blur(10px);
-      border-top: 1px solid rgba(0,0,0,0.08);
-      padding: 0.5rem 0;
-      z-index: 1000;
-    }
-    
-    .bottom-nav-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.25rem;
-      padding: 0.5rem;
-      color: var(--text-dark);
-      text-decoration: none;
-      font-size: 0.75rem;
-      font-weight: 500;
-      transition: color 0.3s ease;
-    }
-    
-    main { padding-bottom: 80px; }
-    
-    .footer {
-      background: var(--text-dark);
-      color: white;
-      padding: 2rem;
-      text-align: center;
-    }
-    
-    .footer-links {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-    }
-    
-    .footer-links a {
-      color: white;
-      font-size: 1.5rem;
-      transition: color 0.3s;
-    }
-    
-    .footer-links a:hover { color: var(--primary); }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/styles.css">
+
 </head>
 <body>
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-light sticky-top">
-    <div class="container-fluid px-3">
-      <a class="navbar-brand logo-text" href="index.html">Sweet Bakery ♡</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
-          <li class="nav-item"><a class="nav-link" href="catalogo.html">Catálogo</a></li>
-          <li class="nav-item"><a class="nav-link" href="sobre-nosotros.html">Sobre Nosotros</a></li>
-          <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
-          <li class="nav-item">
-            <a class="nav-link position-relative" href="carrito.html">
-              <i class="bi bi-cart3"></i> Carrito
-            </a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+   <!-- ========== HEADER (cargado automáticamente) ========== -->
+  <div id="header-placeholder"></div>
+ 
+  <!-- Espaciador para compensar el header fixed-top -->
+  <div class="header-height"></div>
 
   <!-- Main Content -->
   <main>
@@ -324,42 +157,18 @@
     </div>
   </main>
 
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="container-fluid">
-      <p class="logo-text mb-3">Sweet Bakery ♡</p>
-      <div class="footer-links mb-3">
-        <a href="#"><i class="bi bi-instagram"></i></a>
-        <a href="#"><i class="bi bi-facebook"></i></a>
-        <a href="#"><i class="bi bi-whatsapp"></i></a>
-        <a href="#"><i class="bi bi-envelope"></i></a>
-      </div>
-      <p class="text-secondary small mb-0">© 2024 Sweet Bakery. Hecho con amor.</p>
-    </div>
-  </footer>
-
-  <!-- Bottom Navigation -->
-  <div class="bottom-nav d-flex justify-content-around">
-    <a href="index.html" class="bottom-nav-item">
-      <i class="bi bi-house-fill"></i>
-      <span>Inicio</span>
-    </a>
-    <a href="catalogo.html" class="bottom-nav-item">
-      <i class="bi bi-shop"></i>
-      <span>Tienda</span>
-    </a>
-    <a href="#" class="bottom-nav-item">
-      <i class="bi bi-heart"></i>
-      <span>Deseos</span>
-    </a>
-    <a href="carrito.html" class="bottom-nav-item">
-      <i class="bi bi-cart3"></i>
-      <span>Carrito</span>
-    </a>
-  </div>
-
+   <!-- Footer -->
+  
+  <div id="footer-placeholder"></div>
+  <div id="bottomnav-placeholder"></div>
+ 
   <!-- Bootstrap JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+ 
+  <!-- Componentes reutilizables (header + footer) -->
+  <script src="js/components.js"></script>
+
+ 
 
   <script>
     function selectPayment(element, method) {

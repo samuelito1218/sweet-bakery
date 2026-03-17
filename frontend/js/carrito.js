@@ -83,8 +83,17 @@ function vaciarCarrito() {
 function actualizarContadorCarrito() {
   const carrito = obtenerCarrito();
   const total = carrito.reduce((sum, p) => sum + p.cantidad, 0);
+
+  // Badge del viejo navbar (si existe)
   const badge = document.getElementById('cart-count');
   if (badge) badge.textContent = total;
+
+  // Badge del nuevo header (componente reutilizable)
+  const headerBadge = document.getElementById('header-cart-count');
+  if (headerBadge) {
+    headerBadge.textContent = total;
+    headerBadge.style.display = total > 0 ? 'flex' : 'none';
+  }
 }
 
 // ── Renderizar lista del carrito (carrito.html) ───

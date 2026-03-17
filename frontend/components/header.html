@@ -1,0 +1,48 @@
+<header class="glass-header fixed-top border-bottom">
+  <div class="container d-flex align-items-center justify-content-between header-height">
+
+    <!-- icono hamburguesa -->
+    <span class="material-symbols-outlined icon" id="btn-menu" onclick="toggleSidebar()">
+      menu
+    </span>
+
+    <!-- titulo -->
+     <a href="index.html" style="text-decoration:none;">
+      <h1 class="logo text-center">
+        Sweet Bakery by Angel
+      </h1>
+    </a>
+
+    <!-- iconos derecha -->
+    <div class="d-flex gap-3">
+      <span class="material-symbols-outlined icon">
+        search
+      </span>
+      <a href="carrito.html" class="position-relative d-inline-flex" style="color:inherit;text-decoration:none;">
+        <span class="material-symbols-outlined icon">
+          shopping_bag
+        </span>
+          <span class="cart-badge" id="header-cart-count">0</span>
+
+      </a>
+    </div>
+
+  </div>
+</header>
+
+<!-- Overlay oscuro -->
+<div class="sidebar-overlay" id="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+<!-- Sidebar / Menú lateral -->
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <h2 class="logo" style="font-size:22px;">Sweet Bakery by Angel</h2>
+    <span class="material-symbols-outlined icon" onclick="toggleSidebar()">close</span>
+  </div>
+  <ul class="sidebar-menu">
+    <li><a href="index.html" class="sidebar-link" data-page="index"><span class="material-symbols-outlined">home</span> Inicio</a></li>
+    <li><a href="catalogo.html" class="sidebar-link" data-page="catalogo"><span class="material-symbols-outlined">storefront</span> Catálogo</a></li>
+    <li><a href="sobre-nosotros.html" class="sidebar-link" data-page="sobre-nosotros"><span class="material-symbols-outlined">info</span> Sobre Nosotros</a></li>
+    <li><a href="contacto.html" class="sidebar-link" data-page="contacto"><span class="material-symbols-outlined">mail</span> Contacto</a></li>
+  </ul>
+</nav>

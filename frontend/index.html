@@ -10,278 +10,19 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Great+Vibes:wght@400&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --primary: #e23670;
-      --secondary: #955067;
-      --mint: #C1E1C1;
-      --lavender: #E6E6FA;
-      --bg-light: #FFFDF5;
-      --bg-dark: #211117;
-      --text-dark: #1b0e12;
-      --text-light: #fff;
-    }
-
-    * {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-    }
-
-    .logo-text {
-      font-family: 'Great Vibes', cursive;
-      color: var(--primary);
-      font-size: 2rem;
-      font-weight: 400;
-    }
-
-    body {
-      background-color: var(--bg-light);
-      color: var(--text-dark);
-    }
-
-    .navbar {
-      background: rgba(255, 253, 245, 0.95);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(27, 14, 18, 0.05);
-    }
-
-    .hero {
-      background: linear-gradient(to bottom, rgba(255, 249, 242, 0) 0%, rgba(255, 249, 242, 0.92) 72%),
-                  url('https://lh3.googleusercontent.com/aida-public/AB6AXuD5zIOzK6D3nL-xKjZi2T2CiMADqsxXmB9SKFNrl9Jzztfb331hQqky5DvEyBS0CIO8QIrndZNJZi6ms6lGiwMhCu_BoV5fze_pSCsPp9Fvcsur6OYuLyOkd9FvFJKY6LAr2ylv8HjazY7NXPvqV1KauSgBhOduv84BNrQ5f0_wh9QOhb_p8UOljQsADpqFIZDwWpe0Z7sTAxCoo4TUwbV8XCgGuXGzkM_OjZD0AJBK5KjUzqdSYdNY3c_MjVl_vEGKIe2LLgsfXQ') center/cover no-repeat;
-      min-height: 420px;
-      border-radius: 1rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      padding: 2rem;
-      margin: 1rem;
-      text-align: center;
-    }
-
-    .hero h1 {
-      font-size: clamp(1.8rem, 5vw, 3rem);
-      font-weight: 700;
-      color: var(--text-dark);
-      margin-bottom: 0.5rem;
-      line-height: 1.2;
-    }
-
-    .hero p {
-      color: #666;
-      font-size: 0.95rem;
-      max-width: 300px;
-      margin: 0 auto 1.5rem;
-      line-height: 1.6;
-    }
-
-    .categoria-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.5rem;
-      cursor: pointer;
-      flex-shrink: 0;
-    }
-
-    .categoria-icon {
-      width: 62px;
-      height: 62px;
-      border-radius: 50%;
-      background: #fff;
-      border: 1.5px solid rgba(226, 54, 112, 0.12);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-      transition: all 0.2s;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-    }
-
-    .categoria-item.active .categoria-icon,
-    .categoria-item:hover .categoria-icon {
-      background: rgba(226, 54, 112, 0.1);
-      border-color: var(--primary);
-    }
-
-    .categoria-item span {
-      font-size: 0.72rem;
-      font-weight: 600;
-      color: var(--text-dark);
-    }
-
-    .producto-card {
-      border-radius: 1rem;
-      border: none;
-      overflow: hidden;
-      transition: all 0.25s;
-      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-    }
-
-    .producto-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 28px rgba(226, 54, 112, 0.14);
-    }
-
-    .product-img {
-      aspect-ratio: 1/1;
-      object-fit: cover;
-      transition: transform 0.4s;
-    }
-
-    .producto-card:hover .product-img {
-      transform: scale(1.06);
-    }
-
-    .btn-fav {
-      position: absolute;
-      top: 0.5rem;
-      right: 0.5rem;
-      background: rgba(255, 255, 255, 0.85);
-      border: none;
-      border-radius: 50%;
-      width: 34px;
-      height: 34px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--primary);
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .btn-fav:hover {
-      background: var(--primary);
-      color: #fff;
-    }
-
-    .precio {
-      color: var(--primary);
-      font-weight: 700;
-      font-size: 1rem;
-    }
-
-    .btn-primary-custom {
-      background: var(--primary);
-      border: none;
-      color: white;
-      padding: 0.5rem 1.5rem;
-      border-radius: 0.5rem;
-      font-weight: 700;
-      font-size: 0.9rem;
-      text-decoration: none;
-      transition: all 0.2s;
-      display: inline-block;
-      cursor: pointer;
-    }
-
-    .btn-primary-custom:hover {
-      background: #c91d5a;
-      color: white;
-      box-shadow: 0 0 15px rgba(226, 54, 112, 0.4);
-    }
-
-    .footer {
-      background: var(--bg-light);
-      border-top: 1px solid rgba(27, 14, 18, 0.05);
-      padding: 2rem 0;
-      text-align: center;
-    }
-
-    .footer-links a {
-      color: var(--text-dark);
-      margin: 0 1rem;
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-
-    .footer-links a:hover {
-      color: var(--primary);
-    }
-
-    .bottom-nav {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: rgba(255, 253, 245, 0.95);
-      backdrop-filter: blur(12px);
-      border-top: 1px solid rgba(27, 14, 18, 0.05);
-      padding: 0.5rem 0;
-      z-index: 1020;
-    }
-
-    .bottom-nav-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.25rem;
-      cursor: pointer;
-      text-decoration: none;
-      color: var(--secondary);
-      font-size: 0.7rem;
-      font-weight: 500;
-      transition: color 0.2s;
-    }
-
-    .bottom-nav-item.active {
-      color: var(--primary);
-      font-weight: 700;
-    }
-
-    .bottom-nav-item:hover {
-      color: var(--primary);
-    }
-
-    .bottom-nav-item i {
-      font-size: 1.5rem;
-    }
-
-    .badge-new {
-      background: var(--mint);
-      color: var(--text-dark);
-    }
-
-    .badge-popular {
-      background: var(--lavender);
-      color: var(--secondary);
-    }
-
-    main {
-      padding-bottom: 100px;
-    }
-
-    @media (max-width: 576px) {
-      .hero {
-        margin: 0.75rem;
-        min-height: 350px;
-      }
-    }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/styles.css">
 </head>
-<body class="bg-light">
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-light sticky-top">
-    <div class="container-fluid px-3">
-      <a class="navbar-brand logo-text" href="index.html">Sweet Bakery ♡</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link active" href="index.html">Inicio</a></li>
-          <li class="nav-item"><a class="nav-link" href="catalogo.html">Catálogo</a></li>
-          <li class="nav-item"><a class="nav-link" href="sobre-nosotros.html">Sobre Nosotros</a></li>
-          <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
-          <li class="nav-item">
-            <a class="nav-link position-relative" href="carrito.html">
-              <i class="bi bi-cart3"></i> Carrito
-              <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="cart-count">0</span>
-            </a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-
+<body>
+ 
+  <!-- ========== HEADER (cargado automáticamente) ========== -->
+  <div id="header-placeholder"></div>
+ 
+  <!-- Espaciador para compensar el header fixed-top -->
+  <div class="header-height"></div>
+ 
   <!-- Main Content -->
   <main>
     <!-- Hero Banner -->
@@ -293,7 +34,7 @@
         <a href="catalogo.html" class="btn-primary-custom">Ver Catálogo</a>
       </div>
     </section>
-
+ 
     <!-- Categorías -->
     <div class="d-flex gap-3 px-3 py-3 overflow-x-auto" style="overflow-y: hidden;">
       <div class="categoria-item active" onclick="filtrarCategoria(this, 'todos')">
@@ -317,7 +58,7 @@
         <span>Especial</span>
       </div>
     </div>
-
+ 
     <!-- Productos -->
     <section class="pt-3 pb-3 px-3">
       <div class="d-flex justify-content-between align-items-center mb-3">
@@ -327,22 +68,21 @@
         </div>
         <a href="catalogo.html" class="text-primary text-decoration-none fw-bold">Ver todos →</a>
       </div>
-
       <div class="row g-3" id="grid-productos"></div>
     </section>
-
+ 
     <!-- Banner Envío -->
     <section class="mx-3 p-4 rounded" style="background: rgba(226, 54, 112, 0.05); border: 1px solid rgba(226, 54, 112, 0.2);">
       <div class="text-center">
-        <i class="bi bi-truck" style="font-size: 2.4rem; color: var(--primary); margin-bottom: 1rem; display: block;"></i>
+        <i class="material-symbols-outlined" style="font-size: 2.4rem; color: #e23670; margin-bottom: 1rem; display: block;">local_shipping</i>
         <h3 class="h5 mb-2">Domicilio a toda la ciudad</h3>
         <p class="text-secondary mb-3">Empacamos tus postres con cuidado para que lleguen frescos y perfectos.</p>
         <a href="contacto.html" class="btn-primary-custom">Saber más</a>
       </div>
     </section>
-
+ 
     <!-- Newsletter -->
-    <section class="mx-3 my-4 p-4 rounded" style="background: var(--text-dark); color: white;">
+    <section class="mx-3 my-4 p-4 rounded" style="background: #1a1a2e; color: white;">
       <div>
         <h5 class="mb-2">¡Recibe nuestras ofertas!</h5>
         <p class="mb-3 opacity-75">Inscríbete para recibir noticias de nuevos lanzamientos y promociones exclusivas.</p>
@@ -353,113 +93,84 @@
       </div>
     </section>
   </main>
-
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="container-fluid">
-      <p class="logo-text mb-3">Sweet Bakery ♡</p>
-      <div class="footer-links mb-3">
-        <a href="#"><i class="bi bi-instagram"></i></a>
-        <a href="#"><i class="bi bi-facebook"></i></a>
-        <a href="#"><i class="bi bi-whatsapp"></i></a>
-        <a href="#"><i class="bi bi-envelope"></i></a>
-      </div>
-      <p class="text-secondary small mb-0">© 2024 Sweet Bakery. Hecho con amor.</p>
-    </div>
-  </footer>
-
-  <!-- Bottom Navigation -->
-  <div class="bottom-nav d-flex justify-content-around">
-    <a href="index.html" class="bottom-nav-item active">
-      <i class="bi bi-house-fill"></i>
-      <span>Inicio</span>
-    </a>
-    <a href="catalogo.html" class="bottom-nav-item">
-      <i class="bi bi-shop"></i>
-      <span>Tienda</span>
-    </a>
-    <a href="#" class="bottom-nav-item">
-      <i class="bi bi-heart"></i>
-      <span>Deseos</span>
-    </a>
-    <a href="carrito.html" class="bottom-nav-item">
-      <i class="bi bi-cart3"></i>
-      <span>Carrito</span>
-    </a>
-  </div>
-
+ 
+  <!-- ========== FOOTER (cargado automáticamente) ========== -->
+  <div id="footer-placeholder"></div>
+  <div id="bottomnav-placeholder"></div>
+ 
   <!-- Bootstrap JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+ 
+  <!-- Componentes reutilizables (header + footer) -->
+  <script src="js/components.js"></script>
+ 
+  <!-- Carrito JS (si lo usas) -->
+  <!-- <script src="/js/carrito.js"></script> -->
+ 
+  <script>
+    let productos = [];
 
-  <!-- Carrito JS -->
-  <script src="js/carrito.js"></script>
+    fetch('http://localhost:3000/api/productos')
+      .then(r => r.json())
+      .then(data => {
+        productos = data;
+        renderProductos(productos);
+      })
+      .catch(err => {
+        console.error('Error al cargar productos:', err);
+        document.getElementById('grid-productos').innerHTML =
+          '<p class="col-12 text-center text-muted py-4">No se pudieron cargar los productos.</p>';
+      });
 
-    <script>
-      let productos = [];
-
-      // Conectar a la API
-      fetch('http://localhost:3000/api/productos')
-        .then(r => r.json())
-        .then(data => {
-          productos = data;
-          renderProductos(productos);
-        })
-        .catch(err => {
-          console.error('Error al cargar productos:', err);
-          document.getElementById('grid-productos').innerHTML =
-            '<p class="col-12 text-center text-muted py-4">No se pudieron cargar los productos.</p>';
-        });
-
-      function renderProductos(lista) {
-        const grid = document.getElementById('grid-productos');
-        grid.innerHTML = lista.length === 0
-          ? '<p class="col-12 text-center text-muted py-4">No hay productos en esta categoría.</p>'
-          : lista.map(p => `
-            <div class="col-6 col-md-4 col-lg-3">
-              <div class="card producto-card h-100">
-                <div class="position-relative">
-                  <img src="img/${p.imagenPrincipal}" alt="${p.nombre}" class="card-img-top product-img"
-                      onerror="this.src='https://via.placeholder.com/300x300?text=🍰'"/>
-                  <button class="btn-fav" onclick="toggleFavorite(event)">
-                    <i class="material-symbols-outlined">favorite</i>
-                  </button>
-                  <span class="position-absolute top-2 start-2 badge badge-new">Nuevo</span>
-                </div>
-                <div class="card-body">
-                  <h6 class="card-title mb-1">${p.nombre}</h6>
-                  <p class="card-text text-secondary small mb-2">${p.descripcion || ''}</p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <span class="precio">$${Number(p.precio).toLocaleString('es-CO')}</span>
-                    <a href="detalle.html?id=${p._id}" class="btn btn-sm btn-outline-primary">
-                      <i class="material-symbols-outlined" style="font-size:18px;">add</i>
-                    </a>
-                  </div>
+    function renderProductos(lista) {
+      const grid = document.getElementById('grid-productos');
+      grid.innerHTML = lista.length === 0
+        ? '<p class="col-12 text-center text-muted py-4">No hay productos en esta categoría.</p>'
+        : lista.map(p => `
+          <div class="col-6 col-md-4 col-lg-3">
+            <div class="card producto-card h-100">
+              <div class="position-relative">
+                <img src="${p.imagenPrincipal}" alt="${p.nombre}" class="card-img-top product-img"
+                    onerror="this.src='https://via.placeholder.com/300x300?text=🍰'"/>
+                <button class="btn-fav" onclick="toggleFavorite(event)">
+                  <i class="material-symbols-outlined">favorite</i>
+                </button>
+                <span class="position-absolute top-2 start-2 badge badge-new">Nuevo</span>
+              </div>
+              <div class="card-body">
+                <h6 class="card-title mb-1">${p.nombre}</h6>
+                <p class="card-text text-secondary small mb-2">${p.descripcion || ''}</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <span class="precio">$${Number(p.precio).toLocaleString('es-CO')}</span>
+                  <a href="detalle.html?id=${p._id}" class="btn btn-sm btn-outline-primary">
+                    <i class="material-symbols-outlined" style="font-size:18px;">add</i>
+                  </a>
                 </div>
               </div>
             </div>
-          `).join('');
+          </div>
+        `).join('');
+    }
+
+    function filtrarCategoria(el, cat) {
+      document.querySelectorAll('.categoria-item').forEach(i => i.classList.remove('active'));
+      el.classList.add('active');
+
+      if (cat === 'todos') {
+        renderProductos(productos);
+        return;
       }
 
-      function filtrarCategoria(el, cat) {
-        document.querySelectorAll('.categoria-item').forEach(i => i.classList.remove('active'));
-        el.classList.add('active');
+      const filtrados = productos.filter(p =>
+        p.categoriaId?.nombreCategoria?.toLowerCase() === cat.toLowerCase()
+      );
+      renderProductos(filtrados);
+    }
 
-        if (cat === 'todos') {
-          renderProductos(productos);
-          return;
-        }
-
-        // Filtrar por nombre de categoría (viene del populate)
-        const filtrados = productos.filter(p =>
-          p.categoriaId?.nombreCategoria?.toLowerCase() === cat.toLowerCase()
-        );
-        renderProductos(filtrados);
-      }
-
-      function toggleFavorite(e) {
-        e.preventDefault();
-        e.target.closest('.btn-fav').classList.toggle('text-danger');
-      }
-    </script>
+    function toggleFavorite(e) {
+      e.preventDefault();
+      e.target.closest('.btn-fav').classList.toggle('text-danger');
+    }
+  </script>
 </body>
 </html>
