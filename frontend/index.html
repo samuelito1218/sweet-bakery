@@ -394,59 +394,72 @@
   <!-- Carrito JS -->
   <script src="js/carrito.js"></script>
 
-  <script>
-    const productos = [
-      { id: 1, nombre: "Cupcake de Fresa", subtitulo: "Con crema batida", precio: 3.50, categoria: "especial", imagen: "https://lh3.googleusercontent.com/aida-public/AB6AXuAWRNRpMDX5_0ozqBktT7uyJOGdk_9VEp-Vy8rcnwOJV3BdZZUe4sfUaTMIffQJZ9upOi1CBSuaFANv8fYcFjJsZFAVvWxWJ_Rup9unj9tzRH9YgZpNQ2gcedgxyXCX96nJO1h5AaESZf5f_atE0to9YYECTgKiTbSmmgst9heD1qP-LG7yPqkFBzIUDfoBiY1i1fOr_yJKApf4NoD1_t6gIsFh04_Mn7cosdH9F9AN7J0VkxsXNHdT2CD5rkGVlkrwcPKGOxb-CQ" },
-      { id: 2, nombre: "Pan de Masa Madre", subtitulo: "Fermentación 24h", precio: 7.00, categoria: "panes", imagen: "https://lh3.googleusercontent.com/aida-public/AB6AXuBDRHazZDNnzY8HSb2NuPPMN7icvUvxU4CGHmDCx8Xz4gl500yfRRHDPZ-ockV9HF1KXARGxuy6iWVQsiRYzdg9wXbN0higK7TNSP-oZcsGZEQHzgGOQtX1hg_tYpAmLPh97HTbUuH4fHlBx1A8JTLcoQ2Sc4CeX28IPUSs_Nzr35yrsOsVAkBrWpJeN-Wtpv6y3UHEyGyLexIlPjrGZIAw9U4f2cT54ZKDvCk_GUNb0UVdnLJkPNjiuAyDbmC56BOgg5kDM__xpg" },
-      { id: 3, nombre: "Macarons Pack x6", subtitulo: "Almendra molida", precio: 12.50, categoria: "galletas", imagen: "https://lh3.googleusercontent.com/aida-public/AB6AXuCZagaCIrFZsywWS7wQZjsSsbLgWg3G9DefIqmKTed6NJU9ziK55iVMDJsXRf-jf45UeyMciPwgZ-BKkqPV9JHi2YwTJSTDcWJ6HCtGPJhbZzRVcwf7YLOGr9dxJoRa5noUFlkcayCI3KN_7QY85fKIz4LixbNGeM2ei_Rl1TRHHLIBX2eBpUYMH5I-cDgpDTV2_V_sW7m0GBCpuGPYb0MFifWVSmybmxhXzY5p27RjinCElr-7xi4gaA0tzdY54b8Q67McM4TWgg" },
-      { id: 4, nombre: "Croissant Mantequilla", subtitulo: "Hojaldrado a mano", precio: 4.50, categoria: "panes", imagen: "https://lh3.googleusercontent.com/aida-public/AB6AXuCFzrjHKnVI-NQUS4KxTtwyMAxd5Ct6-R-mRSEtsq6iTbTLLqARyVPTVqqVuAEYU2al1bY1DjAk4meGZS4hwSGKTDYGBNE1o6q4PJ9XZUCHKi1iAo598RiI_gMWi_XQ_XtqLN48LSn9qmYJ2zJZsfMuUJfm-a0GvIw23HLr1vHj1udOAsR5ZDMPQycPVsDx65XQ9MQSOO90WiGde8k5QOrfGKlTS_Tr9-ZTooIQyoe5qxewFMPmX8ruSjTnWO8RIXfWyDtY4ay9ww" },
-      { id: 5, nombre: "Caja Degustación", subtitulo: "4 productos surtidos", precio: 28.00, categoria: "especial", imagen: "https://lh3.googleusercontent.com/aida-public/AB6AXuDyDS7e7AllxHuaZTSV9yChdKbz1sVZp5YVm0TymVKnGX0vOiyDWipwxyk_Hmap8ULr-5mDYuIeIT4nG0rzsgWxr-2iuBteGGGIdDXihj9fWIMovCC0GMl34CxkcQrqy8xHos_fpAQM2aJxqwEH61vfrTNxKmqe5yi3b5AHQ5W7Q2UTTMDjkq4QOZXQ7AgGfdSKgx-t9qho8yr7djfzXfBzE2oW5ledtqLA2TkznOu3MzGQUxVBSzbYRnja7_0eD8ggyy5B6yFjfw" },
-      { id: 6, nombre: "Torta de Ángel", subtitulo: "Vainilla y mousse", precio: 45.00, categoria: "tortas", imagen: "https://lh3.googleusercontent.com/aida-public/AB6AXuD5zIOzK6D3nL-xKjZi2T2CiMADqsxXmB9SKFNrl9Jzztfb331hQqky5DvEyBS0CIO8QIrndZNJZi6ms6lGiwMhCu_BoV5fze_pSCsPp9Fvcsur6OYuLyOkd9FvFJKY6LAr2ylv8HjazY7NXPvqV1KauSgBhOduv84BNrQ5f0_wh9QOhb_p8UOljQsADpqFIZDwWpe0Z7sTAxCoo4TUwbV8XCgGuXGzkM_OjZD0AJBK5KjUzqdSYdNY3c_MjVl_vEGKIe2LLgsfXQ" }
-    ];
+    <script>
+      let productos = [];
 
-    function renderProductos(lista) {
-      const grid = document.getElementById('grid-productos');
-      grid.innerHTML = lista.length === 0 
-        ? '<p class="col-12 text-center text-muted py-4">No hay productos en esta categoría.</p>'
-        : lista.map(p => `
-          <div class="col-6 col-md-4 col-lg-3">
-            <div class="card producto-card h-100">
-              <div class="position-relative">
-                <img src="${p.imagen}" alt="${p.nombre}" class="card-img-top product-img">
-                <button class="btn-fav" onclick="toggleFavorite(event)">
-                  <i class="bi bi-heart"></i>
-                </button>
-                <span class="position-absolute top-2 start-2 badge badge-new">Nuevo</span>
-              </div>
-              <div class="card-body">
-                <h6 class="card-title mb-1">${p.nombre}</h6>
-                <p class="card-text text-secondary small mb-2">${p.subtitulo}</p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <span class="precio">$${p.precio.toFixed(2)}</span>
-                  <a href="detalle.html?id=${p.id}" class="btn btn-sm btn-outline-primary">
-                    <i class="bi bi-plus"></i>
-                  </a>
+      // Conectar a la API
+      fetch('http://localhost:3000/api/productos')
+        .then(r => r.json())
+        .then(data => {
+          productos = data;
+          renderProductos(productos);
+        })
+        .catch(err => {
+          console.error('Error al cargar productos:', err);
+          document.getElementById('grid-productos').innerHTML =
+            '<p class="col-12 text-center text-muted py-4">No se pudieron cargar los productos.</p>';
+        });
+
+      function renderProductos(lista) {
+        const grid = document.getElementById('grid-productos');
+        grid.innerHTML = lista.length === 0
+          ? '<p class="col-12 text-center text-muted py-4">No hay productos en esta categoría.</p>'
+          : lista.map(p => `
+            <div class="col-6 col-md-4 col-lg-3">
+              <div class="card producto-card h-100">
+                <div class="position-relative">
+                  <img src="img/${p.imagenPrincipal}" alt="${p.nombre}" class="card-img-top product-img"
+                      onerror="this.src='https://via.placeholder.com/300x300?text=🍰'"/>
+                  <button class="btn-fav" onclick="toggleFavorite(event)">
+                    <i class="material-symbols-outlined">favorite</i>
+                  </button>
+                  <span class="position-absolute top-2 start-2 badge badge-new">Nuevo</span>
+                </div>
+                <div class="card-body">
+                  <h6 class="card-title mb-1">${p.nombre}</h6>
+                  <p class="card-text text-secondary small mb-2">${p.descripcion || ''}</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <span class="precio">$${Number(p.precio).toLocaleString('es-CO')}</span>
+                    <a href="detalle.html?id=${p._id}" class="btn btn-sm btn-outline-primary">
+                      <i class="material-symbols-outlined" style="font-size:18px;">add</i>
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        `).join('');
-    }
+          `).join('');
+      }
 
-    function filtrarCategoria(el, cat) {
-      document.querySelectorAll('.categoria-item').forEach(i => i.classList.remove('active'));
-      el.classList.add('active');
-      renderProductos(cat === 'todos' ? productos : productos.filter(p => p.categoria === cat));
-    }
+      function filtrarCategoria(el, cat) {
+        document.querySelectorAll('.categoria-item').forEach(i => i.classList.remove('active'));
+        el.classList.add('active');
 
-    function toggleFavorite(e) {
-      e.preventDefault();
-      e.target.closest('.btn-fav').classList.toggle('text-danger');
-    }
+        if (cat === 'todos') {
+          renderProductos(productos);
+          return;
+        }
 
-    // Inicializar
-    renderProductos(productos);
-    updateCartCount();
-  </script>
+        // Filtrar por nombre de categoría (viene del populate)
+        const filtrados = productos.filter(p =>
+          p.categoriaId?.nombreCategoria?.toLowerCase() === cat.toLowerCase()
+        );
+        renderProductos(filtrados);
+      }
+
+      function toggleFavorite(e) {
+        e.preventDefault();
+        e.target.closest('.btn-fav').classList.toggle('text-danger');
+      }
+    </script>
 </body>
 </html>
