@@ -170,81 +170,92 @@
 
  
 
+  <!-- Carrito JS -->
+<script src="js/carrito.js"></script>
+<script src="js/whatsapp.js"></script>
+
   <script>
     function selectPayment(element, method) {
       document.querySelectorAll('.payment-option').forEach(opt => opt.classList.remove('active'));
       element.classList.add('active');
-      
-      const cardPayment = document.getElementById('cardPayment');
-      if (method === 'card') {
-        cardPayment.style.display = 'block';
-      } else {
-        cardPayment.style.display = 'none';
-      }
+      document.getElementById('cardPayment').style.display = method === 'card' ? 'block' : 'none';
     }
 
     function loadOrderSummary() {
-      const cart = JSON.parse(localStorage.getItem('cart') || '[]');
-      
+      const cart = obtenerCarrito();
+
       if (cart.length === 0) {
         document.getElementById('order-summary').innerHTML = '<p class="text-danger">El carrito está vacío</p>';
         return;
       }
-      
+
       let subtotal = 0;
       const itemsHtml = cart.map(item => {
-        const total = item.precio * item.quantity;
+        const total = item.precio * item.cantidad;
         subtotal += total;
         return `
-          <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem; padding-bottom: 0.5rem; border-bottom: 1px solid #f0f0f0;">
-            <span>${item.nombre} x${item.quantity}</span>
-            <span>$${total.toFixed(2)}</span>
+          <div style="display:flex;justify-content:space-between;margin-bottom:.5rem;padding-bottom:.5rem;border-bottom:1px solid #f0f0f0;">
+            <span>${item.nombre} x${item.cantidad}</span>
+            <span>$${total.toLocaleString('es-CO')}</span>
           </div>
         `;
       }).join('');
-      
-      const total = subtotal + 5;
+
+      const envio = 5000;
+      const total = subtotal + envio;
+
       document.getElementById('order-summary').innerHTML = itemsHtml + `
-        <div style="margin-top: 1rem; padding-top: 1rem; border-top: 2px solid var(--primary);">
-          <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+        <div style="margin-top:1rem;padding-top:1rem;border-top:2px solid var(--primary);">
+          <div style="display:flex;justify-content:space-between;margin-bottom:.5rem;">
             <span>Subtotal</span>
-            <span>$${subtotal.toFixed(2)}</span>
+            <span>$${subtotal.toLocaleString('es-CO')}</span>
           </div>
-          <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+          <div style="display:flex;justify-content:space-between;margin-bottom:1rem;">
             <span>Envío</span>
-            <span>$5.00</span>
+            <span>$${envio.toLocaleString('es-CO')}</span>
           </div>
-          <div style="display: flex; justify-content: space-between; font-weight: 700; font-size: 1.1rem; color: var(--primary);">
+          <div style="display:flex;justify-content:space-between;font-weight:700;font-size:1.1rem;color:var(--primary);">
             <span>Total</span>
-            <span>$${total.toFixed(2)}</span>
+            <span>$${total.toLocaleString('es-CO')}</span>
           </div>
         </div>
       `;
     }
 
     function completeCheckout() {
-      const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+      const cart = obtenerCarrito();
       if (cart.length === 0) {
-        alert('El carrito está vacío');
+        mostrarNotificacion('El carrito está vacío 😕');
         return;
       }
 
-      // Store order data
-      const orderNumber = Math.floor(Math.random() * 900000) + 100000;
-      const orderData = {
-        orderNumber,
-        items: cart,
-        total: cart.reduce((sum, item) => sum + (item.precio * item.quantity), 0) + 5,
-        date: new Date().toISOString()
+      // Recoger datos del formulario
+      const inputs = document.querySelectorAll('#shippingForm input');
+      const datosPedido = {
+        nombre:    inputs[0]?.value.trim(),
+        email:     inputs[1]?.value.trim(),
+        telefono:  inputs[2]?.value.trim(),
+        direccion: inputs[3]?.value.trim(),
+        ciudad:    inputs[4]?.value.trim() || 'Cali',
+        referencia:'',
+        metodo:    'domicilio',
+        pago:      document.querySelector('.payment-option.active')?.querySelector('h6')?.textContent || '',
+        fecha:     new Date().toLocaleDateString('es-CO'),
+        horario:   '',
+        nota:      '',
       };
-      
-      localStorage.setItem('lastOrder', JSON.stringify(orderData));
-      localStorage.removeItem('cart');
-      
-      window.location.href = 'confirmacion.html';
+
+      if (!datosPedido.nombre || !datosPedido.telefono) {
+        mostrarNotificacion('Completa nombre y teléfono 😊');
+        return;
+      }
+
+      guardarDatosPedido(datosPedido);   // viene de whatsapp.js
+      enviarPedidoPorWhatsApp();         // viene de whatsapp.js
     }
 
     loadOrderSummary();
+    actualizarContadorCarrito();
   </script>
 </body>
 </html>

@@ -50,8 +50,14 @@ function enviarPedidoPorWhatsApp() {
 
   msg += `\n\n_Pedido generado desde sweetbakery.com_`;
 
-  // ── Guardar pedido en el backend antes de redirigir ──//
-  // Por ahora redirigir directamente:
+  const orderNumber = Math.floor(Math.random() * 900000) + 100000;
+  localStorage.setItem('lastOrder', JSON.stringify({
+    orderNumber,
+    items: carrito,
+    total: calcularTotal(),
+    date: new Date().toISOString()
+  }));
+
   limpiarYRedirigir(msg);
 }
 

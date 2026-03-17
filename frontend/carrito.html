@@ -72,9 +72,8 @@
   <script src="js/carrito.js"></script>
 
   <script>
-    /* ── Renderizar carrito usando funciones de carrito.js ── */
     function renderCart() {
-      const cart = obtenerCarrito(); // ← usa carrito.js
+      const cart = obtenerCarrito();
 
       if (cart.length === 0) {
         document.getElementById('cart-empty').style.display = 'block';
@@ -92,37 +91,38 @@
 
         return `
           <div class="cart-item">
-            <img src="${item.imagen}" alt="${item.nombre}">
+            <img src="${item.imagenPrincipal}" alt="${item.nombre}"
+                onerror="this.src='https://via.placeholder.com/80x80?text=🍰'"/>
             <div class="flex-grow-1">
               <h6 class="fw-bold mb-1">${item.nombre}</h6>
-              <p class="text-secondary small mb-2">$${item.precio.toFixed(2)} c/u</p>
+              <p class="text-secondary small mb-2">$${Number(item.precio).toLocaleString('es-CO')} c/u</p>
               <div class="d-flex gap-2">
                 <input type="number" value="${item.cantidad}" min="1" class="quantity-input"
-                       onchange="updateQty(${item.id}, this.value)">
-                <button class="btn btn-sm btn-outline-danger" onclick="removeItem(${item.id})">
+                      onchange="updateQty('${item._id}', this.value)">
+                <button class="btn btn-sm btn-outline-danger" onclick="removeItem('${item._id}')">
                   <i class="bi bi-trash"></i>
                 </button>
               </div>
             </div>
             <div class="text-end">
-              <p class="fw-bold">$${totalItem.toFixed(2)}</p>
+              <p class="fw-bold">$${totalItem.toLocaleString('es-CO')}</p>
             </div>
           </div>
         `;
       }).join('');
 
       document.getElementById('cart-items').innerHTML = itemsHtml;
-      document.getElementById('subtotal').textContent = '$' + subtotal.toFixed(2);
-      document.getElementById('total').textContent = '$' + (subtotal + 5).toFixed(2);
+      document.getElementById('subtotal').textContent = '$' + subtotal.toLocaleString('es-CO');
+      document.getElementById('total').textContent    = '$' + (subtotal + 5000).toLocaleString('es-CO');
     }
 
     function updateQty(id, qty) {
-      cambiarCantidad(id, parseInt(qty)); // ← usa carrito.js
+      cambiarCantidad(id, parseInt(qty));
       renderCart();
     }
 
     function removeItem(id) {
-      eliminarDelCarrito(id); // ← usa carrito.js
+      eliminarDelCarrito(id);
       renderCart();
     }
 
