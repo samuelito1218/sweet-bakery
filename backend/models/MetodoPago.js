@@ -16,4 +16,4 @@ const metodoPagoSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model('MetodoPago', metodoPagoSchema);
+module.exports = mongoose.models.MetodoPago     || mongoose.model('MetodoPago', metodoPagoSchema);

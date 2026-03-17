@@ -16,4 +16,4 @@ const imagenProductoSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model('ImagenProducto', imagenProductoSchema);
+module.exports = mongoose.models.ImagenProducto || mongoose.model('ImagenProducto', imagenProductoSchema);

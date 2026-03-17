@@ -29,4 +29,4 @@ const detallePedidoSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model('DetallePedido', detallePedidoSchema);
+module.exports = mongoose.models.DetallePedido  || mongoose.model('DetallePedido', detallePedidoSchema);

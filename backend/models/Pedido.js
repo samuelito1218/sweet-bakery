@@ -60,4 +60,4 @@ const pedidoSchema = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model('Pedido', pedidoSchema);
+module.exports = mongoose.models.Pedido         || mongoose.model('Pedido', pedidoSchema);

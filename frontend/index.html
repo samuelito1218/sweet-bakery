@@ -1,245 +1,452 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Sweet Bakery by Angel</title>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sweet Bakery by Angel - Inicio</title>
   <!-- Bootstrap 5 -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Bootstrap Icons -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
-
-  <!-- Estilos propios (frontend/css/) -->
-  <link rel="stylesheet" href="css/variables.css"/>
-  <link rel="stylesheet" href="css/global.css"/>
-  <!-- Samuel: cuando tengas el header.css listo, añadirlo aquí -->
-
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Great+Vibes:wght@400&display=swap" rel="stylesheet">
   <style>
-    /* ── Estilos específicos de index.html ─────── */
+    :root {
+      --primary: #e23670;
+      --secondary: #955067;
+      --mint: #C1E1C1;
+      --lavender: #E6E6FA;
+      --bg-light: #FFFDF5;
+      --bg-dark: #211117;
+      --text-dark: #1b0e12;
+      --text-light: #fff;
+    }
+
+    * {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    .logo-text {
+      font-family: 'Great Vibes', cursive;
+      color: var(--primary);
+      font-size: 2rem;
+      font-weight: 400;
+    }
+
+    body {
+      background-color: var(--bg-light);
+      color: var(--text-dark);
+    }
+
+    .navbar {
+      background: rgba(255, 253, 245, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(27, 14, 18, 0.05);
+    }
 
     .hero {
-      position: relative; min-height: 420px;
-      background:
-        linear-gradient(to bottom, rgba(255,249,242,0) 0%, rgba(255,249,242,.92) 72%),
-        url('https://images.unsplash.com/photo-1551879400-111a9087cd86?w=1200&q=80') center/cover no-repeat;
-      border-radius: var(--radio); margin: 12px;
-      display: flex; flex-direction: column;
-      justify-content: flex-end; padding: 36px 28px; text-align: center;
+      background: linear-gradient(to bottom, rgba(255, 249, 242, 0) 0%, rgba(255, 249, 242, 0.92) 72%),
+                  url('https://lh3.googleusercontent.com/aida-public/AB6AXuD5zIOzK6D3nL-xKjZi2T2CiMADqsxXmB9SKFNrl9Jzztfb331hQqky5DvEyBS0CIO8QIrndZNJZi6ms6lGiwMhCu_BoV5fze_pSCsPp9Fvcsur6OYuLyOkd9FvFJKY6LAr2ylv8HjazY7NXPvqV1KauSgBhOduv84BNrQ5f0_wh9QOhb_p8UOljQsADpqFIZDwWpe0Z7sTAxCoo4TUwbV8XCgGuXGzkM_OjZD0AJBK5KjUzqdSYdNY3c_MjVl_vEGKIe2LLgsfXQ') center/cover no-repeat;
+      min-height: 420px;
+      border-radius: 1rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 2rem;
+      margin: 1rem;
+      text-align: center;
     }
-    .hero-label {
-      font-size: .7rem; font-weight: 700; letter-spacing: .2em;
-      text-transform: uppercase; color: var(--rosa); margin-bottom: 8px;
-    }
+
     .hero h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(1.8rem, 5vw, 3rem); font-weight: 700;
-      color: var(--texto); margin-bottom: 10px; line-height: 1.15;
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 0.5rem;
+      line-height: 1.2;
     }
+
     .hero p {
-      color: var(--gris); font-size: .95rem;
-      max-width: 300px; margin: 0 auto 24px; line-height: 1.6;
+      color: #666;
+      font-size: 0.95rem;
+      max-width: 300px;
+      margin: 0 auto 1.5rem;
+      line-height: 1.6;
     }
 
-    .categorias-scroll {
-      display: flex; gap: 20px; overflow-x: auto;
-      padding: 20px 16px; scrollbar-width: none;
+    .categoria-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+      flex-shrink: 0;
     }
-    .categorias-scroll::-webkit-scrollbar { display: none; }
-    .cat-item {
-      display: flex; flex-direction: column;
-      align-items: center; gap: 6px; flex-shrink: 0; cursor: pointer;
-    }
-    .cat-icon {
-      width: 62px; height: 62px; border-radius: 50%;
-      background: #fff; border: 1.5px solid rgba(238,43,140,.12);
-      box-shadow: var(--sombra);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.5rem; transition: background .2s, border-color .2s;
-    }
-    .cat-item.active .cat-icon, .cat-item:hover .cat-icon {
-      background: var(--rosa-bg); border-color: var(--rosa);
-    }
-    .cat-item span { font-size: .72rem; font-weight: 600; color: var(--texto); }
 
-    .section-header {
-      display: flex; justify-content: space-between;
-      align-items: center; padding: 8px 16px 4px;
+    .categoria-icon {
+      width: 62px;
+      height: 62px;
+      border-radius: 50%;
+      background: #fff;
+      border: 1.5px solid rgba(226, 54, 112, 0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      transition: all 0.2s;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
     }
-    .section-header h2 { font-size: 1.25rem; font-weight: 700; margin: 0; font-family: 'DM Sans', sans-serif; }
-    .link-ver-todo { color: var(--rosa); font-size: .85rem; font-weight: 700; text-decoration: none; }
 
-    .productos-grid {
-      display: grid; grid-template-columns: repeat(2, 1fr);
-      gap: 14px; padding: 12px 16px;
+    .categoria-item.active .categoria-icon,
+    .categoria-item:hover .categoria-icon {
+      background: rgba(226, 54, 112, 0.1);
+      border-color: var(--primary);
     }
-    @media (min-width: 576px) { .productos-grid { grid-template-columns: repeat(3,1fr); } }
-    @media (min-width: 992px) { .productos-grid { grid-template-columns: repeat(4,1fr); } }
+
+    .categoria-item span {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--text-dark);
+    }
 
     .producto-card {
-      background: #fff; border-radius: var(--radio); overflow: hidden;
-      box-shadow: 0 2px 12px rgba(0,0,0,.06); border: 1px solid rgba(0,0,0,.04);
-      transition: transform .25s, box-shadow .25s;
+      border-radius: 1rem;
+      border: none;
+      overflow: hidden;
+      transition: all 0.25s;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
     }
+
     .producto-card:hover {
       transform: translateY(-4px);
-      box-shadow: 0 8px 28px rgba(238,43,140,.14);
+      box-shadow: 0 8px 28px rgba(226, 54, 112, 0.14);
     }
-    .card-img-wrap { position: relative; aspect-ratio: 1/1; overflow: hidden; }
-    .card-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s; }
-    .producto-card:hover .card-img-wrap img { transform: scale(1.06); }
+
+    .product-img {
+      aspect-ratio: 1/1;
+      object-fit: cover;
+      transition: transform 0.4s;
+    }
+
+    .producto-card:hover .product-img {
+      transform: scale(1.06);
+    }
+
     .btn-fav {
-      position: absolute; top: 8px; right: 8px;
-      background: rgba(255,255,255,.85); backdrop-filter: blur(6px);
-      border: none; border-radius: 50%; width: 34px; height: 34px;
-      display: flex; align-items: center; justify-content: center;
-      color: var(--rosa); font-size: 1rem; cursor: pointer; transition: background .2s;
-    }
-    .btn-fav:hover { background: var(--rosa); color: #fff; }
-    .card-body-custom { padding: 10px 12px 12px; }
-    .card-body-custom .nombre { font-size: .88rem; font-weight: 700; margin-bottom: 2px; line-height: 1.3; }
-    .card-body-custom .subtitulo { font-size: .75rem; color: var(--gris); margin-bottom: 10px; }
-    .precio-row { display: flex; justify-content: space-between; align-items: center; }
-    .precio { color: var(--rosa); font-weight: 700; font-size: .95rem; }
-    .btn-carrito {
-      background: var(--menta); border: none; border-radius: 8px;
-      width: 32px; height: 32px;
-      display: flex; align-items: center; justify-content: center;
-      color: #1a5c3a; font-size: .9rem; cursor: pointer; transition: background .2s;
-    }
-    .btn-carrito:hover { background: var(--menta-dark); }
-
-    .banner-envio {
-      margin: 16px; padding: 28px 24px;
-      background: var(--rosa-bg); border: 1px solid rgba(238,43,140,.2);
-      border-radius: var(--radio); text-align: center;
-    }
-    .banner-envio i { font-size: 2.4rem; color: var(--rosa); margin-bottom: 12px; display: block; }
-    .banner-envio h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 8px; }
-    .banner-envio p { font-size: .875rem; color: var(--gris); margin-bottom: 14px; }
-    .link-saber-mas {
-      color: var(--rosa); font-weight: 700; font-size: .875rem;
-      border-bottom: 1.5px solid var(--rosa); padding-bottom: 1px; text-decoration: none;
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+      background: rgba(255, 255, 255, 0.85);
+      border: none;
+      border-radius: 50%;
+      width: 34px;
+      height: 34px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+      cursor: pointer;
+      transition: all 0.2s;
     }
 
-    @media (min-width: 992px) {
-      .hero { min-height: 520px; margin: 20px; }
-      .hero h1 { font-size: 3.2rem; }
-      .productos-grid { padding: 16px 20px; gap: 20px; }
-      .section-header { padding: 12px 20px 6px; }
-      .banner-envio { margin: 20px; }
+    .btn-fav:hover {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .precio {
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 1rem;
+    }
+
+    .btn-primary-custom {
+      background: var(--primary);
+      border: none;
+      color: white;
+      padding: 0.5rem 1.5rem;
+      border-radius: 0.5rem;
+      font-weight: 700;
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: all 0.2s;
+      display: inline-block;
+      cursor: pointer;
+    }
+
+    .btn-primary-custom:hover {
+      background: #c91d5a;
+      color: white;
+      box-shadow: 0 0 15px rgba(226, 54, 112, 0.4);
+    }
+
+    .footer {
+      background: var(--bg-light);
+      border-top: 1px solid rgba(27, 14, 18, 0.05);
+      padding: 2rem 0;
+      text-align: center;
+    }
+
+    .footer-links a {
+      color: var(--text-dark);
+      margin: 0 1rem;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary);
+    }
+
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(255, 253, 245, 0.95);
+      backdrop-filter: blur(12px);
+      border-top: 1px solid rgba(27, 14, 18, 0.05);
+      padding: 0.5rem 0;
+      z-index: 1020;
+    }
+
+    .bottom-nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.25rem;
+      cursor: pointer;
+      text-decoration: none;
+      color: var(--secondary);
+      font-size: 0.7rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .bottom-nav-item.active {
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .bottom-nav-item:hover {
+      color: var(--primary);
+    }
+
+    .bottom-nav-item i {
+      font-size: 1.5rem;
+    }
+
+    .badge-new {
+      background: var(--mint);
+      color: var(--text-dark);
+    }
+
+    .badge-popular {
+      background: var(--lavender);
+      color: var(--secondary);
+    }
+
+    main {
+      padding-bottom: 100px;
+    }
+
+    @media (max-width: 576px) {
+      .hero {
+        margin: 0.75rem;
+        min-height: 350px;
+      }
     }
   </style>
 </head>
-<body>
+<body class="bg-light">
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+    <div class="container-fluid px-3">
+      <a class="navbar-brand logo-text" href="index.html">Sweet Bakery ♡</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link active" href="index.html">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link" href="catalogo.html">Catálogo</a></li>
+          <li class="nav-item"><a class="nav-link" href="sobre-nosotros.html">Sobre Nosotros</a></li>
+          <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
+          <li class="nav-item">
+            <a class="nav-link position-relative" href="carrito.html">
+              <i class="bi bi-cart3"></i> Carrito
+              <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="cart-count">0</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
-  <!-- Samuel: incluir aquí el header/navbar superior -->
-  <!-- Ejemplo: <div id="header-placeholder"></div> o el include que acuerden -->
-
+  <!-- Main Content -->
   <main>
-
-    <!-- Hero -->
+    <!-- Hero Banner -->
     <section class="hero">
-      <span class="hero-label">🍞 Hecho fresco cada día</span>
+      <span class="badge text-dark" style="background: var(--mint); width: fit-content; margin: 0 auto 1rem;">🍞 Hecho fresco cada día</span>
       <h1>Dulces hechos<br>con amor</h1>
-      <p>Postres artesanales preparados en casa y llevados hasta tu puerta en Cali.</p>
-      <div><a href="catalogo.html" class="btn-primary-custom">Ver catálogo</a></div>
+      <p>Postres artesanales preparados en casa y llevados hasta tu puerta.</p>
+      <div>
+        <a href="catalogo.html" class="btn-primary-custom">Ver Catálogo</a>
+      </div>
     </section>
 
     <!-- Categorías -->
-    <div class="categorias-scroll">
-      <div class="cat-item active" onclick="filtrarCategoria(this,'todos')">
-        <div class="cat-icon">🏠</div><span>Todos</span>
+    <div class="d-flex gap-3 px-3 py-3 overflow-x-auto" style="overflow-y: hidden;">
+      <div class="categoria-item active" onclick="filtrarCategoria(this, 'todos')">
+        <div class="categoria-icon">🏠</div>
+        <span>Todos</span>
       </div>
-      <div class="cat-item" onclick="filtrarCategoria(this,'rollos')">
-        <div class="cat-icon">🌀</div><span>Rollos</span>
+      <div class="categoria-item" onclick="filtrarCategoria(this, 'tortas')">
+        <div class="categoria-icon">🎂</div>
+        <span>Tortas</span>
       </div>
-      <div class="cat-item" onclick="filtrarCategoria(this,'galletas')">
-        <div class="cat-icon">🍪</div><span>Galletas</span>
+      <div class="categoria-item" onclick="filtrarCategoria(this, 'galletas')">
+        <div class="categoria-icon">🍪</div>
+        <span>Galletas</span>
       </div>
-      <div class="cat-item" onclick="filtrarCategoria(this,'waffles')">
-        <div class="cat-icon">🧇</div><span>Waffles</span>
+      <div class="categoria-item" onclick="filtrarCategoria(this, 'panes')">
+        <div class="categoria-icon">🍞</div>
+        <span>Panes</span>
       </div>
-      <div class="cat-item" onclick="filtrarCategoria(this,'especial')">
-        <div class="cat-icon">✨</div><span>Especial</span>
+      <div class="categoria-item" onclick="filtrarCategoria(this, 'especial')">
+        <div class="categoria-icon">✨</div>
+        <span>Especial</span>
       </div>
     </div>
 
-    <!-- Productos destacados -->
-    <div class="section-header">
-      <h2>Nuestros favoritos</h2>
-      <a href="catalogo.html" class="link-ver-todo">Ver todos</a>
-    </div>
-    <div class="productos-grid" id="grid-productos"></div>
+    <!-- Productos -->
+    <section class="pt-3 pb-3 px-3">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <div>
+          <h2 class="mb-1">Nuestros Favoritos</h2>
+          <p class="text-secondary mb-0">Explora nuestras creaciones recién horneadas</p>
+        </div>
+        <a href="catalogo.html" class="text-primary text-decoration-none fw-bold">Ver todos →</a>
+      </div>
 
-    <!-- Banner envío -->
-    <div class="banner-envio">
-      <i class="bi bi-truck"></i>
-      <h3>Domicilio a toda Cali</h3>
-      <p>Empacamos tus postres con cuidado para que lleguen frescos y perfectos.</p>
-      <a href="contacto.html" class="link-saber-mas">Saber más</a>
-    </div>
+      <div class="row g-3" id="grid-productos"></div>
+    </section>
 
+    <!-- Banner Envío -->
+    <section class="mx-3 p-4 rounded" style="background: rgba(226, 54, 112, 0.05); border: 1px solid rgba(226, 54, 112, 0.2);">
+      <div class="text-center">
+        <i class="bi bi-truck" style="font-size: 2.4rem; color: var(--primary); margin-bottom: 1rem; display: block;"></i>
+        <h3 class="h5 mb-2">Domicilio a toda la ciudad</h3>
+        <p class="text-secondary mb-3">Empacamos tus postres con cuidado para que lleguen frescos y perfectos.</p>
+        <a href="contacto.html" class="btn-primary-custom">Saber más</a>
+      </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="mx-3 my-4 p-4 rounded" style="background: var(--text-dark); color: white;">
+      <div>
+        <h5 class="mb-2">¡Recibe nuestras ofertas!</h5>
+        <p class="mb-3 opacity-75">Inscríbete para recibir noticias de nuevos lanzamientos y promociones exclusivas.</p>
+        <div class="input-group">
+          <input type="email" class="form-control" placeholder="Tu correo electrónico">
+          <button class="btn btn-light" type="button">Suscribirme</button>
+        </div>
+      </div>
+    </section>
   </main>
 
-  <!-- Samuel: incluir aquí el footer y el bottom-nav -->
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container-fluid">
+      <p class="logo-text mb-3">Sweet Bakery ♡</p>
+      <div class="footer-links mb-3">
+        <a href="#"><i class="bi bi-instagram"></i></a>
+        <a href="#"><i class="bi bi-facebook"></i></a>
+        <a href="#"><i class="bi bi-whatsapp"></i></a>
+        <a href="#"><i class="bi bi-envelope"></i></a>
+      </div>
+      <p class="text-secondary small mb-0">© 2024 Sweet Bakery. Hecho con amor.</p>
+    </div>
+  </footer>
+
+  <!-- Bottom Navigation -->
+  <div class="bottom-nav d-flex justify-content-around">
+    <a href="index.html" class="bottom-nav-item active">
+      <i class="bi bi-house-fill"></i>
+      <span>Inicio</span>
+    </a>
+    <a href="catalogo.html" class="bottom-nav-item">
+      <i class="bi bi-shop"></i>
+      <span>Tienda</span>
+    </a>
+    <a href="#" class="bottom-nav-item">
+      <i class="bi bi-heart"></i>
+      <span>Deseos</span>
+    </a>
+    <a href="carrito.html" class="bottom-nav-item">
+      <i class="bi bi-cart3"></i>
+      <span>Carrito</span>
+    </a>
+  </div>
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-  <!-- Carrito (frontend/js/carrito.js) -->
+  <!-- Carrito JS -->
   <script src="js/carrito.js"></script>
 
   <script>
-    /*
-     * DATOS DE PRUEBA — reemplazar con fetch a la API cuando Samuel la tenga lista:
-     *
-     *   fetch('http://localhost:3000/api/productos')
-     *     .then(r => r.json())
-     *     .then(data => renderProductos(data));
-     */
     const productos = [
-      { id: 1, nombre: "Mini Rollos de Canela",  subtitulo: "Con glaseado de vainilla",    precio: 12000, categoria: "rollos",   imagen: "https://images.unsplash.com/photo-1509365465985-25d11c17e812?w=400&q=80" },
-      { id: 2, nombre: "Galletas de Chispas",     subtitulo: "Chocolate negro y leche",      precio: 8000,  categoria: "galletas", imagen: "https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=400&q=80" },
-      { id: 3, nombre: "Waffles Artesanales",     subtitulo: "Con fresas y crema chantilly", precio: 14000, categoria: "waffles",  imagen: "https://images.unsplash.com/photo-1562376552-0d160a2f238d?w=400&q=80" },
-      { id: 4, nombre: "Brownies de Chocolate",   subtitulo: "Doble chocolate oscuro",       precio: 10000, categoria: "galletas", imagen: "https://images.unsplash.com/photo-1569864358642-9d1684040f43?w=400&q=80" },
+      { id: 1, nombre: "Cupcake de Fresa", subtitulo: "Con crema batida", precio: 3.50, categoria: "especial", imagen: "https://lh3.googleusercontent.com/aida-public/AB6AXuAWRNRpMDX5_0ozqBktT7uyJOGdk_9VEp-Vy8rcnwOJV3BdZZUe4sfUaTMIffQJZ9upOi1CBSuaFANv8fYcFjJsZFAVvWxWJ_Rup9unj9tzRH9YgZpNQ2gcedgxyXCX96nJO1h5AaESZf5f_atE0to9YYECTgKiTbSmmgst9heD1qP-LG7yPqkFBzIUDfoBiY1i1fOr_yJKApf4NoD1_t6gIsFh04_Mn7cosdH9F9AN7J0VkxsXNHdT2CD5rkGVlkrwcPKGOxb-CQ" },
+      { id: 2, nombre: "Pan de Masa Madre", subtitulo: "Fermentación 24h", precio: 7.00, categoria: "panes", imagen: "https://lh3.googleusercontent.com/aida-public/AB6AXuBDRHazZDNnzY8HSb2NuPPMN7icvUvxU4CGHmDCx8Xz4gl500yfRRHDPZ-ockV9HF1KXARGxuy6iWVQsiRYzdg9wXbN0higK7TNSP-oZcsGZEQHzgGOQtX1hg_tYpAmLPh97HTbUuH4fHlBx1A8JTLcoQ2Sc4CeX28IPUSs_Nzr35yrsOsVAkBrWpJeN-Wtpv6y3UHEyGyLexIlPjrGZIAw9U4f2cT54ZKDvCk_GUNb0UVdnLJkPNjiuAyDbmC56BOgg5kDM__xpg" },
+      { id: 3, nombre: "Macarons Pack x6", subtitulo: "Almendra molida", precio: 12.50, categoria: "galletas", imagen: "https://lh3.googleusercontent.com/aida-public/AB6AXuCZagaCIrFZsywWS7wQZjsSsbLgWg3G9DefIqmKTed6NJU9ziK55iVMDJsXRf-jf45UeyMciPwgZ-BKkqPV9JHi2YwTJSTDcWJ6HCtGPJhbZzRVcwf7YLOGr9dxJoRa5noUFlkcayCI3KN_7QY85fKIz4LixbNGeM2ei_Rl1TRHHLIBX2eBpUYMH5I-cDgpDTV2_V_sW7m0GBCpuGPYb0MFifWVSmybmxhXzY5p27RjinCElr-7xi4gaA0tzdY54b8Q67McM4TWgg" },
+      { id: 4, nombre: "Croissant Mantequilla", subtitulo: "Hojaldrado a mano", precio: 4.50, categoria: "panes", imagen: "https://lh3.googleusercontent.com/aida-public/AB6AXuCFzrjHKnVI-NQUS4KxTtwyMAxd5Ct6-R-mRSEtsq6iTbTLLqARyVPTVqqVuAEYU2al1bY1DjAk4meGZS4hwSGKTDYGBNE1o6q4PJ9XZUCHKi1iAo598RiI_gMWi_XQ_XtqLN48LSn9qmYJ2zJZsfMuUJfm-a0GvIw23HLr1vHj1udOAsR5ZDMPQycPVsDx65XQ9MQSOO90WiGde8k5QOrfGKlTS_Tr9-ZTooIQyoe5qxewFMPmX8ruSjTnWO8RIXfWyDtY4ay9ww" },
+      { id: 5, nombre: "Caja Degustación", subtitulo: "4 productos surtidos", precio: 28.00, categoria: "especial", imagen: "https://lh3.googleusercontent.com/aida-public/AB6AXuDyDS7e7AllxHuaZTSV9yChdKbz1sVZp5YVm0TymVKnGX0vOiyDWipwxyk_Hmap8ULr-5mDYuIeIT4nG0rzsgWxr-2iuBteGGGIdDXihj9fWIMovCC0GMl34CxkcQrqy8xHos_fpAQM2aJxqwEH61vfrTNxKmqe5yi3b5AHQ5W7Q2UTTMDjkq4QOZXQ7AgGfdSKgx-t9qho8yr7djfzXfBzE2oW5ledtqLA2TkznOu3MzGQUxVBSzbYRnja7_0eD8ggyy5B6yFjfw" },
+      { id: 6, nombre: "Torta de Ángel", subtitulo: "Vainilla y mousse", precio: 45.00, categoria: "tortas", imagen: "https://lh3.googleusercontent.com/aida-public/AB6AXuD5zIOzK6D3nL-xKjZi2T2CiMADqsxXmB9SKFNrl9Jzztfb331hQqky5DvEyBS0CIO8QIrndZNJZi6ms6lGiwMhCu_BoV5fze_pSCsPp9Fvcsur6OYuLyOkd9FvFJKY6LAr2ylv8HjazY7NXPvqV1KauSgBhOduv84BNrQ5f0_wh9QOhb_p8UOljQsADpqFIZDwWpe0Z7sTAxCoo4TUwbV8XCgGuXGzkM_OjZD0AJBK5KjUzqdSYdNY3c_MjVl_vEGKIe2LLgsfXQ" }
     ];
 
     function renderProductos(lista) {
       const grid = document.getElementById('grid-productos');
-      grid.innerHTML = lista.length === 0
-        ? '<p class="text-center text-muted py-4" style="grid-column:1/-1">No hay productos en esta categoría.</p>'
+      grid.innerHTML = lista.length === 0 
+        ? '<p class="col-12 text-center text-muted py-4">No hay productos en esta categoría.</p>'
         : lista.map(p => `
-          <div class="producto-card">
-            <div class="card-img-wrap">
-              <img src="${p.imagen}" alt="${p.nombre}" loading="lazy"/>
-              <button class="btn-fav" aria-label="Favorito"><i class="bi bi-heart-fill"></i></button>
-            </div>
-            <div class="card-body-custom">
-              <p class="nombre">${p.nombre}</p>
-              <p class="subtitulo">${p.subtitulo}</p>
-              <div class="precio-row">
-                <span class="precio">$${p.precio.toLocaleString('es-CO')}</span>
-                <button class="btn-carrito" onclick="agregarAlCarrito(${p.id}, productos)" aria-label="Agregar">
-                  <i class="bi bi-cart-plus"></i>
+          <div class="col-6 col-md-4 col-lg-3">
+            <div class="card producto-card h-100">
+              <div class="position-relative">
+                <img src="${p.imagen}" alt="${p.nombre}" class="card-img-top product-img">
+                <button class="btn-fav" onclick="toggleFavorite(event)">
+                  <i class="bi bi-heart"></i>
                 </button>
+                <span class="position-absolute top-2 start-2 badge badge-new">Nuevo</span>
+              </div>
+              <div class="card-body">
+                <h6 class="card-title mb-1">${p.nombre}</h6>
+                <p class="card-text text-secondary small mb-2">${p.subtitulo}</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <span class="precio">$${p.precio.toFixed(2)}</span>
+                  <a href="detalle.html?id=${p.id}" class="btn btn-sm btn-outline-primary">
+                    <i class="bi bi-plus"></i>
+                  </a>
+                </div>
               </div>
             </div>
-          </div>`).join('');
+          </div>
+        `).join('');
     }
 
     function filtrarCategoria(el, cat) {
-      document.querySelectorAll('.cat-item').forEach(i => i.classList.remove('active'));
+      document.querySelectorAll('.categoria-item').forEach(i => i.classList.remove('active'));
       el.classList.add('active');
       renderProductos(cat === 'todos' ? productos : productos.filter(p => p.categoria === cat));
     }
 
+    function toggleFavorite(e) {
+      e.preventDefault();
+      e.target.closest('.btn-fav').classList.toggle('text-danger');
+    }
+
     // Inicializar
     renderProductos(productos);
-    actualizarContadorCarrito(); // definida en js/carrito.js
+    updateCartCount();
   </script>
-
 </body>
 </html>

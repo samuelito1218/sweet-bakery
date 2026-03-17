@@ -1,30 +1,20 @@
 const mongoose = require('mongoose');
 
-const direccionSchema = new mongoose.Schema(
+const categoriaSchema = new mongoose.Schema(
   {
-    clienteId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Cliente',
-      required: [true, 'El cliente es obligatorio'],
-    },
-    direccion: {
+    nombreCategoria: {
       type: String,
-      required: [true, 'La dirección es obligatoria'],
+      required: [true, 'El nombre de la categoría es obligatorio'],
       trim: true,
     },
-    ciudad: {
+    descripcion: {
       type: String,
-      required: [true, 'La ciudad es obligatoria'],
       trim: true,
-      default: 'Cali',
-    },
-    referencia: {
-      type: String,
-      required: [true, 'La referencia es obligatoria'],
-      trim: true,
+      default: '',
     },
   },
   { timestamps: true }
 );
 
-module.exports = mongoose.model('Direccion', direccionSchema);
+
+module.exports = mongoose.models.Categoria      || mongoose.model('Categoria', categoriaSchema);

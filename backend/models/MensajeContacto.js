@@ -26,4 +26,4 @@ const mensajeContactoSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model('MensajeContacto', mensajeContactoSchema);
+module.exports = mongoose.models.MensajeContacto || mongoose.model('MensajeContacto', mensajeContactoSchema);

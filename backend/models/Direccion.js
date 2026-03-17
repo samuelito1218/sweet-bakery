@@ -27,4 +27,4 @@ const direccionSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model('Direccion', direccionSchema);
+module.exports = mongoose.models.Direccion || mongoose.model('Direccion', direccionSchema);
