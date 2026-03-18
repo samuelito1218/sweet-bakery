@@ -80,7 +80,7 @@
   <script>
     let productos = [];
 
-    fetch('https://sweet-bakery-uhjg.onrender.com')
+    fetch('https://sweet-bakery-uhjg.onrender.com/api/productos')
   .then(r => r.json())
   .then(data => {
     productos = data;
