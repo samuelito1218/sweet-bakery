@@ -136,7 +136,7 @@
       btn.disabled = true;
       btn.textContent = 'Enviando...';
 
-      fetch('http://localhost:3000/api/mensajes-contacto', {
+      fetch('https://sweet-bakery-uhjg.onrender.com/api/mensajes-contacto', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ nombre, email, mensaje })
