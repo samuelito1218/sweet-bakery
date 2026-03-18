@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout - Sweet Bakery</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/styles.css">
+
+  <style>
+    /* Step Indicator */
+    .step-indicator {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 2rem;
+      gap: 1rem;
+    }
+    .step {
+      flex: 1;
+      text-align: center;
+      position: relative;
+    }
+    .step-number {
+      width: 50px;
+      height: 50px;
+      margin: 0 auto 0.5rem;
+      background: #f0f0f0;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      color: #999;
+      font-size: 1.2rem;
+    }
+    .step.active .step-number {
+      background: var(--primary);
+      color: white;
+    }
+    .step-label {
+      font-size: 0.9rem;
+      color: #666;
+      font-weight: 500;
+    }
+    .step.active .step-label {
+      color: var(--primary);
+      font-weight: bold;
+    }
+
+    /* Form Section */
+    .form-section {
+      background: #f9f9f9;
+      padding: 2rem;
+      border-radius: 10px;
+      margin-bottom: 2rem;
+      border: 1px solid #e0e0e0;
+    }
+
+    /* Payment Option */
+    .payment-option {
+      border: 2px solid #ddd;
+      padding: 1.5rem;
+      margin: 1rem 0;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .payment-option:hover {
+      border-color: var(--primary);
+      background: rgba(193, 105, 34, 0.05);
+    }
+    .payment-option.active {
+      border-color: var(--primary);
+      background: rgba(193, 105, 34, 0.1);
+    }
+
+    /* Button */
+    .btn-primary-custom {
+      background: linear-gradient(135deg, var(--primary) 0%, #d4754a 100%);
+      color: white;
+      border: none;
+      padding: 12px 30px;
+      padding: 15px 30px;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 2rem;
+      transition: transform 0.3s, box-shadow 0.3s;
+      display: inline-block;
+      text-align: center;
+      text-decoration: none;
+    }
+    .btn-primary-custom:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px rgba(193, 105, 34, 0.3);
+      color: white;
+    }
+
+    /* Secondary Button */
+    .btn-secondary-custom {
+      background: white;
+      color: var(--primary);
+      border: 2px solid var(--primary);
+      padding: 15px 30px;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 1rem;
+      transition: all 0.3s;
+      display: inline-block;
+      text-align: center;
+      text-decoration: none;
+    }
+    .btn-secondary-custom:hover {
+      background: var(--primary);
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <!-- ========== HEADER ========== -->
+  <div id="header-placeholder"></div>
+  <div class="header-height"></div>
+
+  <!-- Main Content -->
+  <main>
+    <div class="container py-4">
+      <h1 class="h2 mb-4">Checkout</h1>
+
+      <!-- Step Indicator -->
+      <div class="step-indicator">
+        <div class="step active">
+          <div class="step-number">1</div>
+          <div class="step-label">Datos</div>
+        </div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <div class="step-label">Pago</div>
+        </div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <div class="step-label">Confirmación</div>
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- Formulario -->
+        <div class="col-12 col-md-8">
+          <!-- Datos del Cliente -->
+          <div class="form-section">
+            <h5 class="fw-bold mb-3">Información de Envío</h5>
+            <form id="shippingForm">
+              <div class="row">
+                <div class="col-12 col-md-6 mb-3">
+                  <label class="form-label fw-bold">Nombre Completo</label>
+                  <input type="text" id="nombreCompleto" class="form-control" placeholder="Juan Pérez" required>
+                </div>
+                <div class="col-12 col-md-6 mb-3">
+                  <label class="form-label fw-bold">Email</label>
+                  <input type="email" id="email" class="form-control" placeholder="juan@example.com">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12 col-md-6 mb-3">
+                  <label class="form-label fw-bold">Teléfono WhatsApp</label>
+                  <input type="tel" id="telefono" class="form-control" placeholder="+57 301 234 5678" required>
+                </div>
+                <div class="col-12 col-md-6 mb-3">
+                  <label class="form-label fw-bold">Dirección</label>
+                  <input type="text" id="direccion" class="form-control" placeholder="Calle 123, Apt 4" required>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12 col-md-6 mb-3">
+                  <label class="form-label fw-bold">Ciudad</label>
+                  <input type="text" id="ciudad" class="form-control" value="Cali" required>
+                </div>
+                <div class="col-12 col-md-6 mb-3">
+                  <label class="form-label fw-bold">Referencia</label>
+                  <input type="text" id="referencia" class="form-control" placeholder="Casa roja con portón azul">
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <!-- Método de Pago -->
+          <div class="form-section">
+            <h5 class="fw-bold mb-3">Método de Pago (Contra Entrega)</h5>
+            
+            <div class="payment-option active" onclick="seleccionarPago('efectivo'); event.stopPropagation();">
+              <div class="d-flex align-items-center">
+                <i class="bi bi-cash-coin" style="font-size: 1.5rem; margin-right: 1rem; color: var(--primary);"></i>
+                <div>
+                  <h6 class="mb-0 fw-bold">Efectivo</h6>
+                  <small class="text-secondary">Paga cuando recibas tu pedido</small>
+                </div>
+              </div>
+            </div>
+
+            <div class="payment-option" onclick="seleccionarPago('transferencia'); event.stopPropagation();">
+              <div class="d-flex align-items-center">
+                <i class="bi bi-bank2" style="font-size: 1.5rem; margin-right: 1rem; color: var(--primary);"></i>
+                <div>
+                  <h6 class="mb-0 fw-bold">Transferencia Bancaria</h6>
+                  <small class="text-secondary">Te contactaremos con los datos</small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <input type="hidden" id="metodoPago" value="efectivo">
+          <button class="btn-primary-custom" onclick="procesarCheckout()">Completar Compra</button>
+          <a href="carrito.html" class="btn-secondary-custom">← Volver al Carrito</a>
+        </div>
+
+        <!-- Resumen del Pedido -->
+        <div class="col-12 col-md-4">
+          <div class="form-section">
+            <h6 class="fw-bold mb-3">Resumen del Pedido</h6>
+            <div id="order-summary" style="font-size: 0.95rem;">
+              <p class="text-secondary">Cargando...</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <div id="footer-placeholder"></div>
+  <div id="bottomnav-placeholder"></div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Componentes reutilizables -->
+  <script src="js/components.js"></script>
+  <script src="js/carrito.js"></script>
+
+  <script>
+    const API_URL = 'http://localhost:3000/api';
+
+    // Cargar resumen del pedido
+    function loadOrderSummary() {
+      const cart = obtenerCarrito();
+
+      if (cart.length === 0) {
+        document.getElementById('order-summary').innerHTML = '<p class="text-danger">El carrito está vacío</p>';
+        return;
+      }
+
+      let subtotal = 0;
+      const itemsHtml = cart.map(item => {
+        const total = item.precio * item.cantidad;
+        subtotal += total;
+        return `
+          <div style="display:flex;justify-content:space-between;margin-bottom:.5rem;padding-bottom:.5rem;border-bottom:1px solid #f0f0f0;">
+            <span>${item.nombre} x${item.cantidad}</span>
+            <span>$${total.toLocaleString('es-CO')}</span>
+          </div>
+        `;
+      }).join('');
+
+      const envio = 5000;
+      const total = subtotal + envio;
+
+      document.getElementById('order-summary').innerHTML = itemsHtml + `
+        <div style="margin-top:1rem;padding-top:1rem;border-top:2px solid var(--primary);">
+          <div style="display:flex;justify-content:space-between;margin-bottom:.5rem;">
+            <span>Subtotal</span>
+            <span>$${subtotal.toLocaleString('es-CO')}</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;margin-bottom:1rem;">
+            <span>Envío</span>
+            <span>$${envio.toLocaleString('es-CO')}</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-weight:700;font-size:1.1rem;color:var(--primary);">
+            <span>Total</span>
+            <span>$${total.toLocaleString('es-CO')}</span>
+          </div>
+        </div>
+      `;
+    }
+
+    // Seleccionar método de pago
+    function seleccionarPago(metodo) {
+      document.querySelectorAll('.payment-option').forEach(box => box.classList.remove('active'));
+      event.currentTarget.classList.add('active');
+      document.getElementById('metodoPago').value = metodo;
+    }
+
+    // Procesar checkout
+    async function procesarCheckout() {
+      try {
+        // Validar formulario
+        const nombreCompleto = document.getElementById('nombreCompleto').value.trim();
+        const telefono = document.getElementById('telefono').value.trim();
+        const direccion = document.getElementById('direccion').value.trim();
+        const ciudad = document.getElementById('ciudad').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const metodoPago = document.getElementById('metodoPago').value;
+
+        if (!nombreCompleto || !telefono || !direccion) {
+          mostrarNotificacion('Completa nombre, teléfono y dirección');
+          return;
+        }
+
+        // Carrito
+        const carrito = obtenerCarrito();
+        if (carrito.length === 0) {
+          mostrarNotificacion('Tu carrito está vacío');
+          return;
+        }
+
+        // Construir detalles con _id (ObjectId de MongoDB)
+        const detalles = carrito.map(item => ({
+          productoId: item._id,
+          cantidad: item.cantidad,
+          precioUnitario: item.precio
+        }));
+
+        // Calcular total
+        let subtotal = carrito.reduce((sum, item) => sum + (item.precio * item.cantidad), 0);
+        const envio = 5000;
+        const total = subtotal + envio;
+
+        // Datos para el backend
+        const datosCheckout = {
+          cliente: {
+            nombreCompleto,
+            telefono,
+            email
+          },
+          direccion: {
+            direccion,
+            ciudad,
+            referencia: document.getElementById('referencia').value.trim()
+          },
+          pedido: {
+            metodoEntrega: 'domicilio',
+            metodoPago,
+            total
+          },
+          detalles
+        };
+
+        console.log('Datos enviados:', datosCheckout);
+
+        // Enviar al backend
+        const response = await fetch(`${API_URL}/pedidos/checkout/procesar`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(datosCheckout)
+        });
+
+        if (!response.ok) {
+          const error = await response.json();
+          throw new Error(error.mensaje || 'Error del servidor');
+        }
+
+        const resultado = await response.json();
+        console.log('Pedido creado:', resultado);
+
+        // Guardar en localStorage
+        localStorage.setItem('pedidoConfirmacion', JSON.stringify({
+          pedido: resultado.pedido,
+          cliente: resultado.cliente,
+          carrito: carrito
+        }));
+
+        // Limpiar carrito
+        localStorage.removeItem('carrito');
+
+        // Mostrar notificación
+        mostrarNotificacion('Pedido creado. Descargando factura...');
+
+        // Descargar PDF automáticamente
+        const enlacePDF = `${API_URL}/pdf/factura/${resultado.pedido._id}`;
+        const linkPDF = document.createElement('a');
+        linkPDF.href = enlacePDF;
+        linkPDF.download = `Factura_${resultado.pedido._id}.pdf`;
+        linkPDF.click();
+
+        // Redirigir a confirmación después de 2 segundos
+        setTimeout(() => {
+          window.location.href = 'confirmacion.html';
+        }, 2000);
+
+      } catch (error) {
+        console.error('Error:', error);
+        mostrarNotificacion('Error: ' + error.message);
+      }
+    }
+
+    // Cargar datos al iniciar
+    loadOrderSummary();
+    actualizarContadorCarrito();
+  </script>
+</body>
+</html>

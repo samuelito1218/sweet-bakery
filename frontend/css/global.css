@@ -1,0 +1,461 @@
+/* ======================================
+   ESTILOS GLOBALES
+   ====================================== */
+
+* {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+body {
+  background-color: var(--bg-light);
+}
+
+/* ======================================
+   TIPOGRAF�A
+   ====================================== */
+
+.logo-text {
+  font-family: 'Great Vibes', cursive;
+  font-size: 1.8rem;
+  color: var(--primary);
+}
+
+
+
+/* ======================================
+   TARJETAS DE PRODUCTO
+   ====================================== */
+
+.producto-card {
+  border: 1px solid #f0f0f0;
+  border-radius: 12px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+}
+
+.producto-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(226, 54, 112, 0.15);
+}
+
+.product-img {
+  object-fit: cover;
+  height: 200px;
+}
+
+.product-image {
+  width: 100%;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.precio {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.btn-fav {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: white;
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  color: var(--secondary);
+  transition: all 0.3s ease;
+}
+
+.btn-fav:hover {
+  transform: scale(1.1);
+}
+
+.btn-fav.text-danger {
+  color: var(--primary) !important;
+}
+
+.badge-new {
+  background: var(--mint);
+  color: var(--text-dark);
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.4rem 0.6rem;
+}
+
+/* ======================================
+   BOTONES PERSONALIZADOS
+   ====================================== */
+
+.btn-primary-custom {
+  background: var(--primary);
+  color: white;
+  padding: 12px 28px;
+  border-radius: 8px;
+  border: none;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-block;
+  box-shadow: 0 4px 15px rgba(226, 54, 112, 0.3);
+  transition: all 0.3s ease;
+}
+
+.btn-primary-custom:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(226, 54, 112, 0.4);
+  color: white;
+  text-decoration: none;
+}
+
+.btn-primary-custom.w-100 {
+  display: block;
+  width: 100%;
+}
+
+/* ======================================
+   P�GINA DE INICIO - HERO
+   ====================================== */
+
+.hero {
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), 
+              url('https://lh3.googleusercontent.com/aida-public/AB6AXuD5zIOzK6D3nL-xKjZi2T2CiMADqsxXmB9SKFNrl9Jzztfb331hQqky5DvEyBS0CIO8QIrndZNJZi6ms6lGiwMhCu_BoV5fze_pSCsPp9Fvcsur6OYuLyOkd9FvFJKY6LAr2ylv8HjazY7NXPvqV1KauSgBhOduv84BNrQ5f0_wh9QOhb_p8UOljQsADpqFIZDwWpe0Z7sTAxCoo4TUwbV8XCgGuXGzkM_OjZD0AJBK5KjUzqdSYdNY3c_MjVl_vEGKIe2LLgsfXQ');
+  background-size: cover;
+  background-position: center;
+  color: white;
+  padding: 5rem 1.5rem;
+  text-align: center;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+}
+
+.hero h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.hero p {
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+  opacity: 0.95;
+}
+
+/* ======================================
+   CATEGOR�AS
+   ====================================== */
+
+.categoria-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 8px;
+  opacity: 0.6;
+}
+
+.categoria-item.active {
+  opacity: 1;
+  color: var(--primary);
+}
+
+.categoria-item:hover {
+  opacity: 1;
+}
+
+.categoria-icon {
+  font-size: 2rem;
+}
+
+/* ======================================
+   DETALLES DE PRODUCTO
+   ====================================== */
+
+.ingredient-tag {
+  display: inline-block;
+  background: var(--lavender);
+  color: var(--text-dark);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  margin: 0.25rem;
+}
+
+.quantity-control {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  width: fit-content;
+  padding: 0.5rem 0.75rem;
+}
+
+.quantity-control button {
+  border: none;
+  background: none;
+  color: var(--primary);
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0;
+}
+
+/* ======================================
+   CARRITO
+   ====================================== */
+
+.cart-item {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  border: 1px solid #f0f0f0;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.cart-item img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.quantity-input {
+  width: 70px;
+  padding: 0.5rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.summary-box {
+  background: white;
+  border: 1px solid #f0f0f0;
+  border-radius: 8px;
+  padding: 1.5rem;
+  position: sticky;
+  top: 80px;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.summary-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+.summary-total {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+/* ======================================
+   CHECKOUT - FORMULARIO
+   ====================================== */
+
+.form-section {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  border: 1px solid #f0f0f0;
+}
+
+.step-indicator {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  position: relative;
+}
+
+.step-number {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #f0f0f0;
+  border: 2px solid #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  z-index: 2;
+}
+
+.step.active .step-number {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
+.step-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.step::after {
+  content: '';
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  width: 100%;
+  height: 2px;
+  background: #f0f0f0;
+  z-index: 1;
+}
+
+.step:last-child::after {
+  display: none;
+}
+
+.step.active::after {
+  background: var(--primary);
+}
+
+.payment-option {
+  border: 2px solid #f0f0f0;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.payment-option:hover {
+  border-color: var(--primary);
+}
+
+.payment-option.active {
+  border-color: var(--primary);
+  background: rgba(226, 54, 112, 0.05);
+}
+
+/* ======================================
+   CONFIRMACI�N
+   ====================================== */
+
+.success-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: var(--mint);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  margin: 0 auto 2rem;
+  animation: slideIn 0.5s ease;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.confirmation-box {
+  background: white;
+  border: 1px solid #f0f0f0;
+  border-radius: 8px;
+  padding: 2rem;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.order-number {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 1rem;
+}
+
+.info-box {
+  background: white;
+  border: 1px solid #f0f0f0;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.info-row:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.info-label {
+  color: #666;
+  font-weight: 600;
+}
+
+.info-value {
+  font-weight: 700;
+}
+
+
+
+/* ======================================
+   CONTENIDO PRINCIPAL
+   ====================================== */
+
+main {
+  padding-bottom: 80px;
+}
+
+
+/* ======================================
+   RESPONSIVIDAD
+   ====================================== */
+
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 1.8rem;
+  }
+  
+  .hero p {
+    font-size: 1rem;
+  }
+  
+  .form-section {
+    padding: 1.5rem;
+  }
+}

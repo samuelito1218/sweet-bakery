@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carrito - Sweet Bakery</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <!-- ========== HEADER ========== -->
+  <div id="header-placeholder"></div>
+  <div class="header-height"></div>
+
+  <!-- Main Content -->
+  <main>
+    <div class="container py-4">
+      <h1 class="h2 mb-1">Tu Carrito</h1>
+      <p class="text-secondary mb-4">Revisa tus productos seleccionados</p>
+
+      <!-- Carrito vacío -->
+      <div class="row" id="cart-empty">
+        <div class="col-12 text-center py-5">
+          <i class="bi bi-cart-x" style="font-size: 3rem; color: #ccc;"></i>
+          <p class="mt-3 text-secondary">Tu carrito está vacío</p>
+          <a href="catalogo.html" class="btn-primary-custom" style="max-width: 200px; margin: 1rem auto;">Ver Catálogo</a>
+        </div>
+      </div>
+
+      <!-- Carrito con productos -->
+      <div class="row" id="cart-content" style="display: none;">
+        <div class="col-12 col-md-8" id="cart-items"></div>
+        <div class="col-12 col-md-4">
+          <div class="summary-box">
+            <h6 class="fw-bold mb-3">Resumen de Pedido</h6>
+            <div class="summary-row">
+              <span>Subtotal</span>
+              <span id="subtotal">$0.00</span>
+            </div>
+            <div class="summary-row">
+              <span>Envío</span>
+              <span id="shipping">$5.00</span>
+            </div>
+            <div class="summary-row">
+              <span class="summary-total">Total</span>
+              <span class="summary-total" id="total">$5.00</span>
+            </div>
+            <a href="checkout.html" class="btn-primary-custom">Ir al Checkout</a>
+            <a href="catalogo.html" class="btn btn-outline-secondary w-100 mt-3">Seguir Comprando</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ========== FOOTER & BOTTOM NAV ========== -->
+  <div id="footer-placeholder"></div>
+  <div id="bottomnav-placeholder"></div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Componentes reutilizables -->
+  <script src="js/components.js"></script>
+
+  <!-- Carrito JS (fuente de verdad) -->
+  <script src="js/carrito.js"></script>
+
+  <script>
+    function renderCart() {
+      const cart = obtenerCarrito();
+
+      if (cart.length === 0) {
+        document.getElementById('cart-empty').style.display = 'block';
+        document.getElementById('cart-content').style.display = 'none';
+        return;
+      }
+
+      document.getElementById('cart-empty').style.display = 'none';
+      document.getElementById('cart-content').style.display = 'flex';
+
+      let subtotal = 0;
+      const itemsHtml = cart.map(item => {
+        const totalItem = item.precio * item.cantidad;
+        subtotal += totalItem;
+
+        return `
+          <div class="cart-item">
+            <img src="${item.imagenPrincipal}" alt="${item.nombre}"
+                onerror="this.src='https://via.placeholder.com/80x80?text=🍰'"/>
+            <div class="flex-grow-1">
+              <h6 class="fw-bold mb-1">${item.nombre}</h6>
+              <p class="text-secondary small mb-2">$${Number(item.precio).toLocaleString('es-CO')} c/u</p>
+              <div class="d-flex gap-2">
+                <input type="number" value="${item.cantidad}" min="1" class="quantity-input"
+                      onchange="updateQty('${item._id}', this.value)">
+                <button class="btn btn-sm btn-outline-danger" onclick="removeItem('${item._id}')">
+                  <i class="bi bi-trash"></i>
+                </button>
+              </div>
+            </div>
+            <div class="text-end">
+              <p class="fw-bold">$${totalItem.toLocaleString('es-CO')}</p>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      document.getElementById('cart-items').innerHTML = itemsHtml;
+      document.getElementById('subtotal').textContent = '$' + subtotal.toLocaleString('es-CO');
+      document.getElementById('total').textContent    = '$' + (subtotal + 5000).toLocaleString('es-CO');
+    }
+
+    function updateQty(id, qty) {
+      cambiarCantidad(id, parseInt(qty));
+      renderCart();
+    }
+
+    function removeItem(id) {
+      eliminarDelCarrito(id);
+      renderCart();
+    }
+
+    renderCart();
+  </script>
+</body>
+</html>
