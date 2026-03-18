@@ -52,6 +52,7 @@
 
   <!-- Carrito JS -->
   <script src="js/carrito.js"></script>
+  <script src="js/favoritos.js"></script>
 
   <script>
     let productoActual = null;
@@ -107,7 +108,7 @@
             <i class="bi bi-cart-plus"></i> Agregar al Carrito
           </button>
 
-          <button class="btn btn-outline-primary w-100">
+          <button class="btn btn-outline-primary w-100" id="btn-favorito" onclick="handleFavoritoDetalle()">
             <i class="bi bi-heart"></i> Agregar a Favoritos
           </button>
         </div>
@@ -142,6 +143,24 @@
       guardarCarrito(carrito);
       mostrarNotificacion('¡Agregado al carrito! 🛒');
     }
+    function actualizarBtnFavorito() {
+  if (!productoActual) return;
+  const btn = document.getElementById('btn-favorito');
+  if (!btn) return;
+  const guardado = esFavorito(productoActual._id || productoActual.id);
+  btn.innerHTML = guardado
+    ? '<i class="bi bi-heart-fill" style="color:#e23670;"></i> Guardado en favoritos'
+    : '<i class="bi bi-heart"></i> Agregar a Favoritos';
+  btn.style.borderColor = guardado ? '#e23670' : '';
+  btn.style.color       = guardado ? '#e23670' : '';
+}
+
+function handleFavoritoDetalle() {
+  if (!productoActual) return;
+  const agregado = toggleFavorito(productoActual);
+  actualizarBtnFavorito();
+  mostrarNotificacion(agregado ? '¡Guardado en favoritos! ❤️' : 'Quitado de favoritos');
+}
 
     // Cargar producto desde la API
     const id = getProductId();

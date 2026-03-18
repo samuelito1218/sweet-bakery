@@ -309,14 +309,14 @@
         const metodoPago = document.getElementById('metodoPago').value;
 
         if (!nombreCompleto || !telefono || !direccion) {
-          mostrarNotificacion('❌ Completa nombre, teléfono y dirección 😊');
+          mostrarNotificacion('Completa nombre, teléfono y dirección');
           return;
         }
 
         // Carrito
         const carrito = obtenerCarrito();
         if (carrito.length === 0) {
-          mostrarNotificacion('❌ Tu carrito está vacío 😕');
+          mostrarNotificacion('Tu carrito está vacío');
           return;
         }
 
@@ -352,7 +352,7 @@
           detalles
         };
 
-        console.log('📤 Datos enviados:', datosCheckout);
+        console.log('Datos enviados:', datosCheckout);
 
         // Enviar al backend
         const response = await fetch(`${API_URL}/pedidos/checkout/procesar`, {
@@ -367,7 +367,7 @@
         }
 
         const resultado = await response.json();
-        console.log('✅ Pedido creado:', resultado);
+        console.log('Pedido creado:', resultado);
 
         // Guardar en localStorage
         localStorage.setItem('pedidoConfirmacion', JSON.stringify({
@@ -380,7 +380,7 @@
         localStorage.removeItem('carrito');
 
         // Mostrar notificación
-        mostrarNotificacion('✅ Pedido creado. Descargando factura...');
+        mostrarNotificacion('Pedido creado. Descargando factura...');
 
         // Descargar PDF automáticamente
         const enlacePDF = `${API_URL}/pdf/factura/${resultado.pedido._id}`;
@@ -395,8 +395,8 @@
         }, 2000);
 
       } catch (error) {
-        console.error('❌ Error:', error);
-        mostrarNotificacion('❌ Error: ' + error.message);
+        console.error('Error:', error);
+        mostrarNotificacion('Error: ' + error.message);
       }
     }
 

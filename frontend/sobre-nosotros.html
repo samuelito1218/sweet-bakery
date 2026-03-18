@@ -12,28 +12,7 @@
   <link rel="stylesheet" href="css/variables.css"/>
   <link rel="stylesheet" href="css/global.css"/>
   <link rel="stylesheet" href="css/styles.css">
-  <style>
-    .hero-nosotros {
-      background: var(--rosa-bg); padding: 48px 24px 32px; text-align: center;
-    }
-    .hero-nosotros h1 {
-      font-family: 'Playfair Display', serif; font-size: clamp(1.8rem,5vw,2.6rem);
-      color: var(--texto); margin-bottom: 12px;
-    }
-    .hero-nosotros p { color: var(--gris); font-size: .95rem; max-width: 480px; margin: 0 auto; line-height: 1.7; }
-    .valor-card {
-      background: var(--blanco); border-radius: var(--radio); padding: 24px;
-      box-shadow: var(--sombra-card); text-align: center;
-    }
-    .valor-icono {
-      font-size: 2rem; margin-bottom: 12px; display: block;
-    }
-    .valor-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
-    .valor-card p  { font-size: .875rem; color: var(--gris); line-height: 1.6; margin: 0; }
-    .seccion-texto { padding: 32px 20px; }
-    .seccion-texto h2 { font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 14px; }
-    .seccion-texto p  { color: var(--gris); font-size: .95rem; line-height: 1.7; }
-  </style>
+  
 </head>
 <body>
 
@@ -44,46 +23,64 @@
   <div class="header-height"></div>
 
   <main>
-    <div class="hero-nosotros">
-      <h1>Hecho con amor,<br>servido con pasión</h1>
-      <p>Somos un emprendimiento estudiantil de repostería artesanal nacido en Cali, Colombia, con el sueño de endulzar cada momento especial.</p>
+
+    <!-- Hero -->
+    <div class="nosotros-hero">
+      <span class="badge-hero">Emprendimiento caleño</span>
+      <h1>Hecho con amor,<br>servido con <span>pasión</span></h1>
+      <p>Somos un emprendimiento estudiantil de repostería artesanal nacido en Cali, Colombia, con el objetivo de endulzar momentos especiales.</p>
     </div>
 
-    <div class="seccion-texto">
-      <h2>Nuestra historia</h2>
-      <p>Sweet Bakery by Angel nació de la pasión por la repostería y el deseo de compartir sabores únicos con la comunidad caleña. Lo que empezó como una aventura casera se convirtió en un emprendimiento dedicado a crear productos artesanales frescos, elaborados con ingredientes de calidad y mucho cariño.</p>
+    <!-- Historia -->
+    <div class="historia-wrap">
+      <p class="seccion-label">Nuestra historia</p>
+      <h2>¿Cómo empezó todo?</h2>
+      <p>Sweet Bakery by Angel nació de la pasión por la repostería y el deseo de compartir sabores únicos con la comunidad. Lo que empezó como una iniciativa casera se convirtió en un emprendimiento enfocado en productos artesanales frescos, elaborados con dedicación y atención al detalle.</p>
     </div>
 
-    <div class="px-4 pb-4">
+    <!-- Valores -->
+    <p class="valores-titulo">Lo que nos caracteriza</p>
+    <div class="px-3 pb-3">
       <div class="row g-3">
         <div class="col-12 col-md-4">
           <div class="valor-card">
-            <span class="valor-icono">🌿</span>
+            <div class="valor-icono-wrap"><i class="bi bi-flower1"></i></div>
             <h3>Ingredientes frescos</h3>
-            <p>Usamos ingredientes de calidad, seleccionados para garantizar el mejor sabor en cada producto.</p>
+            <p>Seleccionamos cuidadosamente cada ingrediente para garantizar calidad y buen sabor.</p>
           </div>
         </div>
         <div class="col-12 col-md-4">
           <div class="valor-card">
-            <span class="valor-icono">🤍</span>
-            <h3>Hecho con amor</h3>
-            <p>Cada postre es preparado a mano con dedicación, como si lo estuviéramos haciendo para nuestra propia familia.</p>
+            <div class="valor-icono-wrap"><i class="bi bi-heart"></i></div>
+            <h3>Hecho con dedicación</h3>
+            <p>Cada producto es elaborado de forma artesanal, cuidando cada detalle en su preparación.</p>
           </div>
         </div>
         <div class="col-12 col-md-4">
           <div class="valor-card">
-            <span class="valor-icono">🚀</span>
-            <h3>Entrega rápida</h3>
-            <p>Llevamos tus postres frescos hasta tu puerta en Cali, cuidadosamente empacados para que lleguen perfectos.</p>
+            <div class="valor-icono-wrap"><i class="bi bi-truck"></i></div>
+            <h3>Entrega oportuna</h3>
+            <p>Llevamos los pedidos de manera segura para que lleguen en óptimas condiciones.</p>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="seccion-texto">
-      <h2>Nuestra misión</h2>
-      <p>Ofrecer productos de repostería artesanal de alta calidad que generen experiencias memorables, apoyando el emprendimiento estudiantil y la economía local de Cali.</p>
+    <!-- Misión -->
+    <div class="mision-wrap">
+      <p class="seccion-label">Nuestra misión</p>
+      <h2>¿Qué nos impulsa?</h2>
+      <p>Ofrecer productos de repostería artesanal de calidad que generen experiencias agradables, apoyando el emprendimiento local y promoviendo el consumo consciente.</p>
     </div>
+
+    <!-- CTA -->
+    <div class="cta-wrap">
+      <h3>Descubre nuestros productos</h3>
+      <p>Explora el catálogo o contáctanos para realizar tu pedido.</p>
+      <a href="catalogo.html" class="btn-cta">Ver catálogo</a>
+      <a href="contacto.html" class="btn-cta-outline">Contáctanos</a>
+    </div>
+
   </main>
 
    <!-- Footer -->

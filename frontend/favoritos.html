@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Favoritos — Sweet Bakery by Angel</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Great+Vibes:wght@400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+  <link rel="stylesheet" href="css/variables.css"/>
+  <link rel="stylesheet" href="css/global.css"/>
+  <link rel="stylesheet" href="css/styles.css">
+  
+</head>
+<body>
+
+  <div id="header-placeholder"></div>
+  <div class="header-height"></div>
+
+  <main>
+    <div class="fav-hero">
+      <h1>Mis Favoritos</h1>
+      <p id="fav-count-texto">Cargando...</p>
+    </div>
+
+    <!-- Vacío -->
+    <div class="empty-fav" id="fav-empty" style="display:none;">
+      <div class="ic"><i class="bi bi-heart"></i></div>
+      <h3>No tienes favoritos aún</h3>
+      <p>Dale al corazón en cualquier producto para guardarlo aquí.</p>
+      <a href="catalogo.html" style="background:#e23670;color:#fff;border-radius:50px;
+         padding:12px 28px;font-weight:700;text-decoration:none;font-size:.9rem;">
+        Ver catálogo
+      </a>
+    </div>
+
+    <!-- Grid -->
+    <div class="row g-3 p-3" id="grid-favoritos"></div>
+  </main>
+
+  <div id="footer-placeholder"></div>
+  <div id="bottomnav-placeholder"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/carrito.js"></script>
+  <script src="js/favoritos.js"></script>
+
+  <script>
+    function renderFavoritos() {
+      const lista = obtenerFavoritos();
+      const grid  = document.getElementById('grid-favoritos');
+      const empty = document.getElementById('fav-empty');
+      const texto = document.getElementById('fav-count-texto');
+
+      texto.textContent = lista.length === 0
+        ? 'No tienes favoritos guardados'
+        : `${lista.length} producto${lista.length > 1 ? 's' : ''} guardado${lista.length > 1 ? 's' : ''}`;
+
+      if (lista.length === 0) {
+        empty.style.display = 'block';
+        grid.innerHTML = '';
+        return;
+      }
+
+      empty.style.display = 'none';
+      grid.innerHTML = lista.map(p => `
+        <div class="col-6 col-md-4 col-lg-3">
+          <div class="producto-card">
+            <div class="card-img-wrap">
+              <img src="${p.imagenPrincipal}" alt="${p.nombre}"
+                   onerror="this.src='https://via.placeholder.com/300x300?text=🍰'"/>
+              <button class="btn-quitar" onclick="quitarFavorito('${p._id || p.id}')"
+                      title="Quitar de favoritos">
+                <i class="bi bi-heart-fill"></i>
+              </button>
+            </div>
+            <div class="card-body-custom">
+              <p class="nombre">${p.nombre}</p>
+              <p class="desc">${p.descripcion || ''}</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <span class="precio">$${Number(p.precio).toLocaleString('es-CO')}</span>
+                <div class="d-flex gap-2">
+                  <a href="detalle.html?id=${p._id || p.id}"
+                     class="btn btn-sm btn-outline-secondary" title="Ver detalle">
+                    <i class="bi bi-eye"></i>
+                  </a>
+                  <button class="btn-agregar" onclick="agregarAlCarrito('${p._id || p.id}', obtenerFavoritos())"
+                          title="Agregar al carrito">
+                    <i class="bi bi-cart-plus"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function quitarFavorito(id) {
+      const lista = obtenerFavoritos().filter(p => (p._id || p.id) !== id);
+      guardarFavoritos(lista);
+      renderFavoritos();
+      mostrarNotificacion('Quitado de favoritos');
+    }
+
+    renderFavoritos();
+    actualizarContadorCarrito();
+  </script>
+</body>
+</html>

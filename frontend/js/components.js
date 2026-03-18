@@ -58,6 +58,24 @@ function updateHeaderCart() {
   badge.style.display = total > 0 ? 'flex' : 'none';
 }
 
+/*-Funciones de la lupa-*/
+function toggleSearch() {
+  const bar = document.getElementById('search-bar');
+  const input = document.getElementById('search-input');
+  if (bar.style.display === 'none') {
+    bar.style.display = 'block';
+    input.focus();
+  } else {
+    bar.style.display = 'none';
+  }
+}
+
+function buscarProducto() {
+  const texto = document.getElementById('search-input').value.trim();
+  if (!texto) return;
+  window.location.href = `catalogo.html?buscar=${encodeURIComponent(texto)}`;
+}
+
 /* ── Init ── */
 document.addEventListener('DOMContentLoaded', async () => {
   await Promise.all([

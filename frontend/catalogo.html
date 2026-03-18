@@ -27,12 +27,22 @@
       <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
           <h1 class="h2 mb-1">Nuestro Catálogo</h1>
-          <p class="text-secondary mb-0">Todos nuestros productos artesanales</p>
+          <p class="text-secondary mb-0">Todos nuestros productos artesanales</p> <br>
+              <!-- Filtros -->
+<div class="d-flex gap-2 mb-4 overflow-x-auto" style="overflow-y:hidden;scrollbar-width:none;">
+  <button class="btn-filtro active" onclick="filtrar(this,'todos')">Todos</button>
+  <button class="btn-filtro" onclick="filtrar(this,'Rollos')">🌀 Rollos</button>
+  <button class="btn-filtro" onclick="filtrar(this,'Galletas')">🍪 Galletas</button>
+  <button class="btn-filtro" onclick="filtrar(this,'Waffles')">🧇 Waffles</button>
+  <button class="btn-filtro" onclick="filtrar(this,'Tortas')">🎂 Tortas</button>
+  <button class="btn-filtro" onclick="filtrar(this,'Especial')">✨ Especial</button>
+</div>
         </div>
       </div>
 
       <div class="row g-3" id="grid-productos"></div>
     </section>
+
   </main>
 
   <!-- Footer -->
@@ -51,20 +61,29 @@
   <!-- Carrito JS -->
   <script src="js/carrito.js"></script>
 
+  <script src="js/favoritos.js"></script>
+
   <script>
     let productos = [];
 
     fetch('http://localhost:3000/api/productos')
-      .then(r => r.json())
-      .then(data => {
-        productos = data;
-        renderProductos(productos);
-      })
-      .catch(err => {
-        console.error('Error al cargar productos:', err);
-        document.getElementById('grid-productos').innerHTML =
-          '<p class="col-12 text-center text-muted py-4">No se pudieron cargar los productos.</p>';
-      });
+  .then(r => r.json())
+  .then(data => {
+    productos = data;
+
+    // Leer parámetro de búsqueda si viene del header
+    const params = new URLSearchParams(window.location.search);
+    const buscar = params.get('buscar');
+    if (buscar) {
+      document.getElementById('search-input-catalogo')?.setAttribute('value', buscar);
+      renderProductos(productos.filter(p =>
+        p.nombre.toLowerCase().includes(buscar.toLowerCase()) ||
+        p.descripcion?.toLowerCase().includes(buscar.toLowerCase())
+      ));
+    } else {
+      renderProductos(productos);
+    }
+  });
 
     function renderProductos(lista) {
       const grid = document.getElementById('grid-productos');
@@ -76,10 +95,11 @@
               <div class="position-relative">
                 <img src="${p.imagenPrincipal}" alt="${p.nombre}" class="card-img-top product-img"
                     onerror="this.src='https://via.placeholder.com/300x300?text=🍰'"/>
-                <button class="btn-fav" onclick="toggleFavorite(event)">
-                  <i class="bi bi-heart"></i>
+                <button class="btn-fav ${esFavorito(p._id) ? 'activo' : ''}"
+                  onclick="handleFavorito(event, this, ${JSON.stringify(p).replace(/"/g, '&quot;')})">
+                  <i class="bi bi-heart${esFavorito(p._id) ? '-fill' : ''}"></i>
                 </button>
-                <span class="position-absolute top-2 start-2 badge badge-new">Nuevo</span>
+                <span class="position-absolute top-2 start-2 badge badge-new"></span>
               </div>
               <div class="card-body">
                 <h6 class="card-title mb-1">${p.nombre}</h6>
@@ -96,10 +116,33 @@
         `).join('');
     }
 
+    function filtrar(el, cat) {
+  document.querySelectorAll('.btn-filtro').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+  if (cat === 'todos') {
+    renderProductos(productos);
+  } else {
+    renderProductos(productos.filter(p =>
+      p.categoriaId?.nombreCategoria === cat
+    ));
+  }
+}
+
+function handleFavorito(e, btn, producto) {
+  e.preventDefault();
+  const agregado = toggleFavorito(producto);
+  btn.innerHTML = agregado
+    ? '<i class="bi bi-heart-fill"></i>'
+    : '<i class="bi bi-heart"></i>';
+  mostrarNotificacion(agregado ? '¡Guardado en favoritos! ❤️' : 'Quitado de favoritos');
+}
+
     function toggleFavorite(e) {
       e.preventDefault();
       e.target.closest('.btn-fav').classList.toggle('text-danger');
     }
+
+
 
     actualizarContadorCarrito();
   </script>

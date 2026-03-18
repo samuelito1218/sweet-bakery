@@ -27,7 +27,7 @@
   <main>
     <!-- Hero Banner -->
     <section class="hero">
-      <span class="badge text-dark" style="background: var(--mint); width: fit-content; margin: 0 auto 1rem;">🍞 Hecho fresco cada día</span>
+      <span class="badge text-dark" style="background: var(--mint); width: fit-content; margin: 0 auto 1rem;"> Hecho fresco cada día</span>
       <h1>Dulces hechos<br>con amor</h1>
       <p>Postres artesanales preparados en casa y llevados hasta tu puerta.</p>
       <div>
@@ -35,29 +35,7 @@
       </div>
     </section>
  
-    <!-- Categorías -->
-    <div class="d-flex gap-3 px-3 py-3 overflow-x-auto" style="overflow-y: hidden;">
-      <div class="categoria-item active" onclick="filtrarCategoria(this, 'todos')">
-        <div class="categoria-icon">🏠</div>
-        <span>Todos</span>
-      </div>
-      <div class="categoria-item" onclick="filtrarCategoria(this, 'tortas')">
-        <div class="categoria-icon">🎂</div>
-        <span>Tortas</span>
-      </div>
-      <div class="categoria-item" onclick="filtrarCategoria(this, 'galletas')">
-        <div class="categoria-icon">🍪</div>
-        <span>Galletas</span>
-      </div>
-      <div class="categoria-item" onclick="filtrarCategoria(this, 'panes')">
-        <div class="categoria-icon">🍞</div>
-        <span>Panes</span>
-      </div>
-      <div class="categoria-item" onclick="filtrarCategoria(this, 'especial')">
-        <div class="categoria-icon">✨</div>
-        <span>Especial</span>
-      </div>
-    </div>
+   
  
     <!-- Productos -->
     <section class="pt-3 pb-3 px-3">
@@ -81,17 +59,7 @@
       </div>
     </section>
  
-    <!-- Newsletter -->
-    <section class="mx-3 my-4 p-4 rounded" style="background: #1a1a2e; color: white;">
-      <div>
-        <h5 class="mb-2">¡Recibe nuestras ofertas!</h5>
-        <p class="mb-3 opacity-75">Inscríbete para recibir noticias de nuevos lanzamientos y promociones exclusivas.</p>
-        <div class="input-group">
-          <input type="email" class="form-control" placeholder="Tu correo electrónico">
-          <button class="btn btn-light" type="button">Suscribirme</button>
-        </div>
-      </div>
-    </section>
+   
   </main>
  
   <!-- ========== FOOTER (cargado automáticamente) ========== -->
@@ -103,6 +71,8 @@
  
   <!-- Componentes reutilizables (header + footer) -->
   <script src="js/components.js"></script>
+
+  <script src="js/favoritos.js"></script>
  
   <!-- Carrito JS (si lo usas) -->
   <!-- <script src="/js/carrito.js"></script> -->
@@ -111,16 +81,11 @@
     let productos = [];
 
     fetch('http://localhost:3000/api/productos')
-      .then(r => r.json())
-      .then(data => {
-        productos = data;
-        renderProductos(productos);
-      })
-      .catch(err => {
-        console.error('Error al cargar productos:', err);
-        document.getElementById('grid-productos').innerHTML =
-          '<p class="col-12 text-center text-muted py-4">No se pudieron cargar los productos.</p>';
-      });
+  .then(r => r.json())
+  .then(data => {
+    productos = data;
+    renderProductos(productos.slice(0, 4)); // solo los primeros 4
+  })
 
     function renderProductos(lista) {
       const grid = document.getElementById('grid-productos');
@@ -132,10 +97,11 @@
               <div class="position-relative">
                 <img src="${p.imagenPrincipal}" alt="${p.nombre}" class="card-img-top product-img"
                     onerror="this.src='https://via.placeholder.com/300x300?text=🍰'"/>
-                <button class="btn-fav" onclick="toggleFavorite(event)">
-                  <i class="material-symbols-outlined">favorite</i>
+                <button class="btn-fav ${esFavorito(p._id) ? 'activo' : ''}"
+                  onclick="handleFavorito(event, this, ${JSON.stringify(p).replace(/"/g, '&quot;')})">
+                  <i class="bi bi-heart${esFavorito(p._id) ? '-fill' : ''}"></i>
                 </button>
-                <span class="position-absolute top-2 start-2 badge badge-new">Nuevo</span>
+                <span class="position-absolute top-2 start-2 badge badge-new"></span>
               </div>
               <div class="card-body">
                 <h6 class="card-title mb-1">${p.nombre}</h6>
@@ -166,6 +132,15 @@
       );
       renderProductos(filtrados);
     }
+
+    function handleFavorito(e, btn, producto) {
+  e.preventDefault();
+  const agregado = toggleFavorito(producto);
+  btn.innerHTML = agregado
+    ? '<i class="bi bi-heart-fill"></i>'
+    : '<i class="bi bi-heart"></i>';
+  mostrarNotificacion(agregado ? '¡Guardado en favoritos! ❤️' : 'Quitado de favoritos');
+}
 
     function toggleFavorite(e) {
       e.preventDefault();
