@@ -13,133 +13,291 @@
   <link rel="stylesheet" href="css/global.css">
   <link rel="stylesheet" href="css/styles.css">
 
+  <style>
+    /* Confirmation Box */
+    .confirmation-box {
+      text-align: center;
+      padding: 3rem 2rem;
+      background: linear-gradient(135deg, rgba(193, 105, 34, 0.08) 0%, rgba(193, 105, 34, 0.02) 100%);
+      border-radius: 12px;
+      margin-bottom: 2rem;
+      border: 1px solid rgba(193, 105, 34, 0.2);
+    }
+    .success-icon {
+      font-size: 4rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+    .order-number {
+      background: linear-gradient(135deg, var(--primary) 0%, #d4754a 100%);
+      color: white;
+      padding: 12px 30px;
+      border-radius: 8px;
+      display: inline-block;
+      font-weight: bold;
+      font-size: 1.2rem;
+      margin: 1rem 0;
+    }
+
+    /* Info Box */
+    .info-box {
+      background: #f9f9f9;
+      padding: 2rem;
+      border-radius: 10px;
+      margin-bottom: 2rem;
+      border: 1px solid #e0e0e0;
+    }
+    .info-box h6 {
+      color: var(--primary);
+      border-bottom: 2px solid var(--primary);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .info-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.8rem 0;
+      border-bottom: 1px solid #eee;
+    }
+    .info-row:last-child {
+      border-bottom: none;
+    }
+    .info-label {
+      font-weight: bold;
+      color: #666;
+    }
+    .info-value {
+      color: #333;
+      text-align: right;
+    }
+
+    /* Button */
+    .btn-primary-custom {
+      background: linear-gradient(135deg, var(--primary) 0%, #d4754a 100%);
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 1rem;
+      transition: transform 0.3s, box-shadow 0.3s;
+      display: inline-block;
+      text-align: center;
+      text-decoration: none;
+    }
+    .btn-primary-custom:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px rgba(193, 105, 34, 0.3);
+      color: white;
+    }
+
+    .btn-whatsapp {
+      background: #25d366;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      width: 100%;
+      margin-bottom: 1rem;
+      transition: all 0.3s;
+      display: inline-block;
+      text-align: center;
+      text-decoration: none;
+    }
+    .btn-whatsapp:hover {
+      background: #20ba5a;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px rgba(37, 211, 102, 0.3);
+      color: white;
+    }
+  </style>
 </head>
 <body>
-   <!-- ========== HEADER (cargado automáticamente) ========== -->
+  <!-- ========== HEADER ========== -->
   <div id="header-placeholder"></div>
- 
-  <!-- Espaciador para compensar el header fixed-top -->
   <div class="header-height"></div>
 
   <!-- Main Content -->
   <main>
     <div class="container py-4">
+      <!-- Success Message -->
       <div class="confirmation-box">
         <div class="success-icon">✓</div>
         <h1 class="h3 mb-2">¡Pedido Confirmado!</h1>
-        <p class="text-secondary mb-4">Gracias por tu compra. Tu pedido ha sido recibido con éxito.</p>
-        
+        <p class="text-secondary mb-2">Gracias por tu compra. Tu pedido ha sido recibido con éxito.</p>
         <div class="order-number" id="order-number">Pedido #123456</div>
-        
-        <p class="text-secondary mb-4">
-          Recibirás un correo de confirmación en los próximos minutos.<br>
-          Tu pedido será entregado en 48 horas.
-        </p>
+        <p class="text-secondary mt-3 mb-0">Tu factura ha sido descargada automáticamente. Puedes descargarla de nuevo en cualquier momento.</p>
       </div>
 
       <div class="row">
+        <!-- Detalles del Pedido -->
         <div class="col-12 col-md-6">
           <div class="info-box">
-            <h6 class="fw-bold mb-3">Detalles del Pedido</h6>
+            <h6 class="fw-bold">Detalles del Pedido</h6>
             <div id="order-items"></div>
-            <div class="info-row" style="border-top: 2px solid var(--primary); padding-top: 1rem; margin-top: 1rem;">
+            <div class="info-row" style="border-top: 2px solid var(--primary); padding-top: 1rem; margin-top: 1rem; font-weight: bold; font-size: 1.1rem;">
               <span class="info-label">Total</span>
               <span class="info-value" id="order-total">$0.00</span>
             </div>
           </div>
         </div>
 
+        <!-- Información de Entrega -->
         <div class="col-12 col-md-6">
           <div class="info-box">
-            <h6 class="fw-bold mb-3">Información de Entrega</h6>
+            <h6 class="fw-bold">Información de Entrega</h6>
+            <div class="info-row">
+              <span class="info-label">Cliente</span>
+              <span class="info-value" id="nombreCliente">-</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Teléfono</span>
+              <span class="info-value" id="telefonoCliente">-</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Dirección</span>
+              <span class="info-value" id="direccionCliente">-</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Ciudad</span>
+              <span class="info-value" id="ciudadCliente">-</span>
+            </div>
             <div class="info-row">
               <span class="info-label">Estado</span>
-              <span class="info-value" style="color: var(--primary);">Confirmado</span>
+              <span class="info-value" style="color: var(--primary); font-weight: bold;">Confirmado</span>
             </div>
             <div class="info-row">
-              <span class="info-label">Fecha Estimada</span>
-              <span class="info-value" id="delivery-date">Hoy +48h</span>
-            </div>
-            <div class="info-row">
-              <span class="info-label">Método de Envío</span>
-              <span class="info-value">Domicilio</span>
+              <span class="info-label">Entrega en</span>
+              <span class="info-value" id="delivery-date">48 horas</span>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="row">
-        <div class="col-12 col-md-6 mb-3">
-          <button class="btn btn-outline-primary w-100 pb-2 pt-2">
+      <!-- Botones -->
+      <div class="row mt-3">
+        <div class="col-12 col-md-4">
+          <a href="https://wa.me/573014132284" target="_blank" class="btn-whatsapp">
             <i class="bi bi-whatsapp" style="margin-right: 0.5rem;"></i>
-            Contactar por WhatsApp
+            Contactar
+          </a>
+        </div>
+        <div class="col-12 col-md-4">
+          <button id="btnDescargaPDF" onclick="descargarPDF()" class="btn-primary-custom">
+            <i class="bi bi-download"></i> Descargar Factura
           </button>
         </div>
-        <div class="col-12 col-md-6">
+        <div class="col-12 col-md-4">
           <a href="index.html" class="btn-primary-custom">
             <i class="bi bi-house"></i> Volver al Inicio
           </a>
         </div>
       </div>
 
+      <!-- Info Box -->
       <div class="info-box mt-4">
-        <h6 class="fw-bold mb-2">Consejos para tu Compra</h6>
-        <ul class="text-start text-secondary" style="font-size: 0.9rem;">
-          <li>Tu pedido está siendo preparado con cuidado</li>
-          <li>Recibirás notificaciones por email sobre el estado</li>
+        <h6 class="fw-bold">Próximos Pasos</h6>
+        <ul class="text-start text-secondary" style="font-size: 0.9rem; margin-bottom: 0;">
+          <li>Tu factura está lista para descargar (se descargó automáticamente)</li>
+          <li>Tu pedido se preparará en 2-4 horas</li>
+          <li>La entrega se realizará en 48 horas máximo</li>
           <li>Si tienes dudas, contáctanos por WhatsApp</li>
-          <li>¡Cuéntanos qué te pareció en nuestras redes!</li>
         </ul>
       </div>
     </div>
   </main>
 
   <!-- Footer -->
-  
   <div id="footer-placeholder"></div>
   <div id="bottomnav-placeholder"></div>
- 
+
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
- 
-  <!-- Componentes reutilizables (header + footer) -->
+
+  <!-- Componentes reutilizables -->
   <script src="js/components.js"></script>
+  <script src="js/carrito.js"></script>
 
   <script>
-    function loadOrderDetails() {
-      const order = JSON.parse(localStorage.getItem('lastOrder') || '{}');
-      
-      if (!order.orderNumber) {
-        document.querySelector('.confirmation-box').innerHTML = '<p class="text-danger">No hay pedido para mostrar</p>';
+    const API_URL = 'http://localhost:3000/api';
+    let pedidoId = null;
+
+    function descargarPDF() {
+      if (!pedidoId) {
+        alert('❌ No hay pedido para descargar');
         return;
       }
 
-      document.getElementById('order-number').textContent = `Pedido #${order.orderNumber}`;
-      
-      const itemsHtml = order.items.map(item => `
-        <div class="info-row">
-          <span>${item.nombre} x${item.quantity}</span>
-          <span>$${(item.precio * item.quantity).toFixed(2)}</span>
-        </div>
-      `).join('');
-      
-      document.getElementById('order-items').innerHTML = itemsHtml;
-      document.getElementById('order-total').textContent = '$' + order.total.toFixed(2);
+      const enlacePDF = `${API_URL}/pdf/factura/${pedidoId}`;
+      const linkPDF = document.createElement('a');
+      linkPDF.href = enlacePDF;
+      linkPDF.download = `Factura_${pedidoId}.pdf`;
+      linkPDF.click();
+    }
 
-      // Calculate delivery date (48 hours from now)
+    function loadOrderDetails() {
+      const confirmacion = JSON.parse(localStorage.getItem('pedidoConfirmacion') || 'null');
+
+      if (!confirmacion || !confirmacion.pedido) {
+        document.querySelector('.confirmation-box').innerHTML = '<p class="text-danger">❌ No hay pedido para mostrar</p>';
+        return;
+      }
+
+      // Número de pedido
+      const numeroPedido = confirmacion.pedido.numero || confirmacion.pedido._id?.substring(0, 8) || '000000';
+      pedidoId = confirmacion.pedido._id;
+      document.getElementById('order-number').textContent = `Pedido #${numeroPedido}`;
+
+      // Datos del cliente
+      document.getElementById('nombreCliente').textContent = confirmacion.cliente?.nombreCompleto || '-';
+      document.getElementById('telefonoCliente').textContent = confirmacion.cliente?.telefono || '-';
+
+      // Productos
+      let html = '';
+      let total = 0;
+      if (confirmacion.carrito && confirmacion.carrito.length > 0) {
+        confirmacion.carrito.forEach(item => {
+          const subtotal = item.precio * item.cantidad;
+          total += subtotal;
+          html += `
+            <div class="info-row">
+              <span>${item.nombre} x${item.cantidad}</span>
+              <strong>$${subtotal.toLocaleString('es-CO')}</strong>
+            </div>
+          `;
+        });
+      }
+      document.getElementById('order-items').innerHTML = html;
+      document.getElementById('order-total').textContent = '$' + (confirmacion.pedido.total || total).toLocaleString('es-CO');
+
+      // Info de entrega
+      document.getElementById('direccionCliente').textContent = 'Domicilio registrado';
+      document.getElementById('ciudadCliente').textContent = 'Cali';
+
+      // Calcular fecha de entrega (48 horas desde ahora)
       const deliveryDate = new Date();
       deliveryDate.setHours(deliveryDate.getHours() + 48);
-      const formattedDate = deliveryDate.toLocaleDateString('es-ES', { 
-        weekday: 'long', 
-        year: 'numeric', 
-        month: 'long', 
-        day: 'numeric' 
+      const formattedDate = deliveryDate.toLocaleDateString('es-ES', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
       });
-      
       document.getElementById('delivery-date').textContent = formattedDate;
+
+      console.log('✅ Confirmación cargada:', confirmacion);
     }
 
     loadOrderDetails();
+
+    // Limpiar localStorage después de 2 minutos
+    setTimeout(() => {
+      localStorage.removeItem('pedidoConfirmacion');
+    }, 120000);
   </script>
 </body>
 </html>

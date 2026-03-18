@@ -30,6 +30,9 @@ app.use('/api/detalle-pedido',   require('./routes/detallePedido'));
 app.use('/api/metodos-pago',     require('./routes/metodosPago'));
 app.use('/api/mensajes-contacto',require('./routes/mensajesContacto'));
 app.use('/api/imagenes-producto',require('./routes/imagenesProducto'));
+app.use('/api/facturas',         require('./routes/facturas'));
+app.use('/api/pdf',              require('./routes/pdf'));
+app.use('/api/whatsapp',         require('./routes/whatsapp'));
 
 // ── Ruta de prueba ────────────────────────────────
 app.get('/', (req, res) => {
@@ -37,10 +40,12 @@ app.get('/', (req, res) => {
 });
 
 // ── Conexión a MongoDB Atlas ──────────────────────
+
 mongoose
   .connect(process.env.MONGODB_URI)
   .then(() => {
     console.log('✅ Conectado a MongoDB Atlas');
+    
     app.listen(PORT, () => {
       console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);
     });

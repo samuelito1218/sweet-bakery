@@ -1,0 +1,37 @@
+# Dependencias
+node_modules/
+
+# Credenciales de WhatsApp (no subir a GitHub)
+backend/auth_info/
+backend/auth_info_qa/
+
+# Variables de entorno
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Compilados
+dist/
+build/
+*.tgz
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Base de datos local
+*.db
+*.sqlite
